@@ -57,5 +57,16 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\comentario.sql" />
+    <Build Include="dbo\Tables\evento.sql" />
+    <Build Include="dbo\Tables\evento_composto.sql" />
+    <Build Include="dbo\Tables\participante.sql" />
+    <Build Include="dbo\Tables\pergunta.sql" />
+    <Build Include="dbo\Tables\resposta.sql" />
+    <Build Include="dbo\Tables\usuario.sql" />
   </ItemGroup>
 </Project>
