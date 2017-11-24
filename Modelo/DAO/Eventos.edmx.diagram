@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1688d17fdcc842a3a0befd4c8867e762" Name="Diagram1">
+        <EntityTypeShape EntityType="EventosModel.comentario" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventosModel.evento" Width="1.5" PointX="6" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventosModel.evento_composto" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventosModel.pergunta" Width="1.5" PointX="8.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventosModel.resposta" Width="1.5" PointX="10.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventosModel.usuario" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="EventosModel.FK_comentario__ToTable_1" ManuallyRouted="false" />
+        <AssociationConnector Association="EventosModel.FK_comentario_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="EventosModel.FK_evento_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="EventosModel.FK_evento_ToTable_1" ManuallyRouted="false" />
+        <AssociationConnector Association="EventosModel.FK_perguntas_ToTable_1" ManuallyRouted="false" />
+        <AssociationConnector Association="EventosModel.FK_resposta_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="EventosModel.FK_resposta_ToTable_1" ManuallyRouted="false" />
+        <AssociationConnector Association="EventosModel.participante" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

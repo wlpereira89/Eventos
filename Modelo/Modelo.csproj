@@ -39,6 +39,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,11 +50,68 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="DAO\comentario.cs">
+      <DependentUpon>Eventos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\evento.cs">
+      <DependentUpon>Eventos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\Eventos.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Eventos.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\Eventos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Eventos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\Eventos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Eventos.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\evento_composto.cs">
+      <DependentUpon>Eventos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\pergunta.cs">
+      <DependentUpon>Eventos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\resposta.cs">
+      <DependentUpon>Eventos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\usuario.cs">
+      <DependentUpon>Eventos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PN\pnEventos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="DAO\Eventos.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Eventos.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DAO\Eventos.edmx.diagram">
+      <DependentUpon>Eventos.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="DAO\Eventos.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Eventos.edmx</DependentUpon>
+      <LastGenOutput>Eventos.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DAO\Eventos.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Eventos.edmx</DependentUpon>
+      <LastGenOutput>Eventos.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

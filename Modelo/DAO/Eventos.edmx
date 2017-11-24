@@ -1,0 +1,568 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EventosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="comentario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="id_evento" Type="int" Nullable="false" />
+          <Property Name="comentario" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="likes" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="evento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Categoria" Type="smallint" Nullable="false" />
+          <Property Name="id_principal" Type="int" />
+          <Property Name="Nome" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Responsavel" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Cancelado" Type="bit" Nullable="false" />
+          <Property Name="palavra_chave" Type="nvarchar" MaxLength="50" />
+          <Property Name="palavra_chave2" Type="nvarchar" MaxLength="50" />
+          <Property Name="limite_participantes" Type="smallint" Nullable="false" />
+          <Property Name="Local" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="data_hr_ini" Type="smalldatetime" Nullable="false" />
+          <Property Name="data_hora_fim" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="evento_composto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="participante">
+          <Key>
+            <PropertyRef Name="login" />
+            <PropertyRef Name="id_evento" />
+          </Key>
+          <Property Name="login" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="id_evento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pergunta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="id_evento" Type="int" Nullable="false" />
+          <Property Name="pergunta" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="resposta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="usuario" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="id_pergunta" Type="int" Nullable="false" />
+          <Property Name="resposta" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="login" />
+          </Key>
+          <Property Name="login" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="pass" Type="nchar" MaxLength="8" Nullable="false" />
+          <Property Name="Nome" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Endereco" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CEP" Type="int" Nullable="false" />
+          <Property Name="Nascimento" Type="date" Nullable="false" />
+          <Property Name="cadastro" Type="smalldatetime" Nullable="false" />
+          <Property Name="CPF" Type="int" Nullable="false" />
+          <Property Name="RG" Type="int" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="r_phone" Type="nchar" MaxLength="10" />
+          <Property Name="cel_phone" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="newsletter" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_comentario _ToTable_1">
+          <End Role="evento" Type="Self.evento" Multiplicity="1" />
+          <End Role="comentario" Type="Self.comentario" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="evento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="comentario">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comentario_ToTable">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="comentario" Type="Self.comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="login" />
+            </Principal>
+            <Dependent Role="comentario">
+              <PropertyRef Name="login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_evento_ToTable">
+          <End Role="evento_composto" Type="Self.evento_composto" Multiplicity="0..1" />
+          <End Role="evento" Type="Self.evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="evento_composto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="evento">
+              <PropertyRef Name="id_principal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_evento_ToTable_1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="evento" Type="Self.evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="login" />
+            </Principal>
+            <Dependent Role="evento">
+              <PropertyRef Name="Responsavel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_participante_ToTable">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="participante" Type="Self.participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="login" />
+            </Principal>
+            <Dependent Role="participante">
+              <PropertyRef Name="login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_participante_ToTable_1">
+          <End Role="evento" Type="Self.evento" Multiplicity="1" />
+          <End Role="participante" Type="Self.participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="evento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="participante">
+              <PropertyRef Name="id_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_perguntas_ToTable_1">
+          <End Role="evento" Type="Self.evento" Multiplicity="1" />
+          <End Role="pergunta" Type="Self.pergunta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="evento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="pergunta">
+              <PropertyRef Name="id_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_resposta_ToTable">
+          <End Role="pergunta" Type="Self.pergunta" Multiplicity="1" />
+          <End Role="resposta" Type="Self.resposta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pergunta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="resposta">
+              <PropertyRef Name="id_pergunta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_resposta_ToTable_1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="resposta" Type="Self.resposta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="login" />
+            </Principal>
+            <Dependent Role="resposta">
+              <PropertyRef Name="usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EventosModelStoreContainer">
+          <EntitySet Name="comentario" EntityType="Self.comentario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="evento" EntityType="Self.evento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="evento_composto" EntityType="Self.evento_composto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="participante" EntityType="Self.participante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pergunta" EntityType="Self.pergunta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="resposta" EntityType="Self.resposta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_comentario _ToTable_1" Association="Self.FK_comentario _ToTable_1">
+            <End Role="evento" EntitySet="evento" />
+            <End Role="comentario" EntitySet="comentario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comentario_ToTable" Association="Self.FK_comentario_ToTable">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="comentario" EntitySet="comentario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_evento_ToTable" Association="Self.FK_evento_ToTable">
+            <End Role="evento_composto" EntitySet="evento_composto" />
+            <End Role="evento" EntitySet="evento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_evento_ToTable_1" Association="Self.FK_evento_ToTable_1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="evento" EntitySet="evento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_participante_ToTable" Association="Self.FK_participante_ToTable">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="participante" EntitySet="participante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_participante_ToTable_1" Association="Self.FK_participante_ToTable_1">
+            <End Role="evento" EntitySet="evento" />
+            <End Role="participante" EntitySet="participante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_perguntas_ToTable_1" Association="Self.FK_perguntas_ToTable_1">
+            <End Role="evento" EntitySet="evento" />
+            <End Role="pergunta" EntitySet="pergunta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_resposta_ToTable" Association="Self.FK_resposta_ToTable">
+            <End Role="pergunta" EntitySet="pergunta" />
+            <End Role="resposta" EntitySet="resposta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_resposta_ToTable_1" Association="Self.FK_resposta_ToTable_1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="resposta" EntitySet="resposta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EventosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="comentario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_evento" Type="Int32" Nullable="false" />
+          <Property Name="comentario1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="likes" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="evento" Relationship="Self.FK_comentario__ToTable_1" FromRole="comentario" ToRole="evento" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK_comentario_ToTable" FromRole="comentario" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="evento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Categoria" Type="Int16" Nullable="false" />
+          <Property Name="id_principal" Type="Int32" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Responsavel" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cancelado" Type="Boolean" Nullable="false" />
+          <Property Name="palavra_chave" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="palavra_chave2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="limite_participantes" Type="Int16" Nullable="false" />
+          <Property Name="Local" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="data_hr_ini" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="data_hora_fim" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="comentario" Relationship="Self.FK_comentario__ToTable_1" FromRole="evento" ToRole="comentario" />
+          <NavigationProperty Name="evento_composto" Relationship="Self.FK_evento_ToTable" FromRole="evento" ToRole="evento_composto" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK_evento_ToTable_1" FromRole="evento" ToRole="usuario" />
+          <NavigationProperty Name="perguntas" Relationship="Self.FK_perguntas_ToTable_1" FromRole="evento" ToRole="pergunta" />
+          <NavigationProperty Name="usuarios" Relationship="Self.participante" FromRole="evento" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="evento_composto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="eventoes" Relationship="Self.FK_evento_ToTable" FromRole="evento_composto" ToRole="evento" />
+        </EntityType>
+        <EntityType Name="pergunta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="id_evento" Type="Int32" Nullable="false" />
+          <Property Name="pergunta1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="evento" Relationship="Self.FK_perguntas_ToTable_1" FromRole="pergunta" ToRole="evento" />
+          <NavigationProperty Name="respostas" Relationship="Self.FK_resposta_ToTable" FromRole="pergunta" ToRole="resposta" />
+        </EntityType>
+        <EntityType Name="resposta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="usuario" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_pergunta" Type="Int32" Nullable="false" />
+          <Property Name="resposta1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="pergunta" Relationship="Self.FK_resposta_ToTable" FromRole="resposta" ToRole="pergunta" />
+          <NavigationProperty Name="usuario1" Relationship="Self.FK_resposta_ToTable_1" FromRole="resposta" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="login" />
+          </Key>
+          <Property Name="login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pass" Type="String" MaxLength="8" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Endereco" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CEP" Type="Int32" Nullable="false" />
+          <Property Name="Nascimento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cadastro" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CPF" Type="Int32" Nullable="false" />
+          <Property Name="RG" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="r_phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="cel_phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="newsletter" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="comentarios" Relationship="Self.FK_comentario_ToTable" FromRole="usuario" ToRole="comentario" />
+          <NavigationProperty Name="eventoes" Relationship="Self.FK_evento_ToTable_1" FromRole="usuario" ToRole="evento" />
+          <NavigationProperty Name="respostas" Relationship="Self.FK_resposta_ToTable_1" FromRole="usuario" ToRole="resposta" />
+          <NavigationProperty Name="eventoes1" Relationship="Self.participante" FromRole="usuario" ToRole="evento" />
+        </EntityType>
+        <Association Name="FK_comentario__ToTable_1">
+          <End Role="evento" Type="Self.evento" Multiplicity="1" />
+          <End Role="comentario" Type="Self.comentario" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="evento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="comentario">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comentario_ToTable">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="comentario" Type="Self.comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="login" />
+            </Principal>
+            <Dependent Role="comentario">
+              <PropertyRef Name="login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_evento_ToTable">
+          <End Role="evento_composto" Type="Self.evento_composto" Multiplicity="0..1" />
+          <End Role="evento" Type="Self.evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="evento_composto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="evento">
+              <PropertyRef Name="id_principal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_evento_ToTable_1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="evento" Type="Self.evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="login" />
+            </Principal>
+            <Dependent Role="evento">
+              <PropertyRef Name="Responsavel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_perguntas_ToTable_1">
+          <End Role="evento" Type="Self.evento" Multiplicity="1" />
+          <End Role="pergunta" Type="Self.pergunta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="evento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="pergunta">
+              <PropertyRef Name="id_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_resposta_ToTable">
+          <End Role="pergunta" Type="Self.pergunta" Multiplicity="1" />
+          <End Role="resposta" Type="Self.resposta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pergunta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="resposta">
+              <PropertyRef Name="id_pergunta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_resposta_ToTable_1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="resposta" Type="Self.resposta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="login" />
+            </Principal>
+            <Dependent Role="resposta">
+              <PropertyRef Name="usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="participante">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <End Role="evento" Type="Self.evento" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="EventosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="comentarios" EntityType="Self.comentario" />
+          <EntitySet Name="eventoes" EntityType="Self.evento" />
+          <EntitySet Name="evento_composto" EntityType="Self.evento_composto" />
+          <EntitySet Name="perguntas" EntityType="Self.pergunta" />
+          <EntitySet Name="respostas" EntityType="Self.resposta" />
+          <EntitySet Name="usuarios" EntityType="Self.usuario" />
+          <AssociationSet Name="FK_comentario__ToTable_1" Association="Self.FK_comentario__ToTable_1">
+            <End Role="evento" EntitySet="eventoes" />
+            <End Role="comentario" EntitySet="comentarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comentario_ToTable" Association="Self.FK_comentario_ToTable">
+            <End Role="usuario" EntitySet="usuarios" />
+            <End Role="comentario" EntitySet="comentarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_evento_ToTable" Association="Self.FK_evento_ToTable">
+            <End Role="evento_composto" EntitySet="evento_composto" />
+            <End Role="evento" EntitySet="eventoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_evento_ToTable_1" Association="Self.FK_evento_ToTable_1">
+            <End Role="usuario" EntitySet="usuarios" />
+            <End Role="evento" EntitySet="eventoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_perguntas_ToTable_1" Association="Self.FK_perguntas_ToTable_1">
+            <End Role="evento" EntitySet="eventoes" />
+            <End Role="pergunta" EntitySet="perguntas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_resposta_ToTable" Association="Self.FK_resposta_ToTable">
+            <End Role="pergunta" EntitySet="perguntas" />
+            <End Role="resposta" EntitySet="respostas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_resposta_ToTable_1" Association="Self.FK_resposta_ToTable_1">
+            <End Role="usuario" EntitySet="usuarios" />
+            <End Role="resposta" EntitySet="respostas" />
+          </AssociationSet>
+          <AssociationSet Name="participante" Association="Self.participante">
+            <End Role="usuario" EntitySet="usuarios" />
+            <End Role="evento" EntitySet="eventoes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EventosModelStoreContainer" CdmEntityContainer="EventosEntities">
+          <EntitySetMapping Name="comentarios">
+            <EntityTypeMapping TypeName="EventosModel.comentario">
+              <MappingFragment StoreEntitySet="comentario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="id_evento" ColumnName="id_evento" />
+                <ScalarProperty Name="comentario1" ColumnName="comentario" />
+                <ScalarProperty Name="likes" ColumnName="likes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventoes">
+            <EntityTypeMapping TypeName="EventosModel.evento">
+              <MappingFragment StoreEntitySet="evento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="id_principal" ColumnName="id_principal" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Responsavel" ColumnName="Responsavel" />
+                <ScalarProperty Name="Cancelado" ColumnName="Cancelado" />
+                <ScalarProperty Name="palavra_chave" ColumnName="palavra_chave" />
+                <ScalarProperty Name="palavra_chave2" ColumnName="palavra_chave2" />
+                <ScalarProperty Name="limite_participantes" ColumnName="limite_participantes" />
+                <ScalarProperty Name="Local" ColumnName="Local" />
+                <ScalarProperty Name="data_hr_ini" ColumnName="data_hr_ini" />
+                <ScalarProperty Name="data_hora_fim" ColumnName="data_hora_fim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="evento_composto">
+            <EntityTypeMapping TypeName="EventosModel.evento_composto">
+              <MappingFragment StoreEntitySet="evento_composto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="perguntas">
+            <EntityTypeMapping TypeName="EventosModel.pergunta">
+              <MappingFragment StoreEntitySet="pergunta">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="id_evento" ColumnName="id_evento" />
+                <ScalarProperty Name="pergunta1" ColumnName="pergunta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="respostas">
+            <EntityTypeMapping TypeName="EventosModel.resposta">
+              <MappingFragment StoreEntitySet="resposta">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="id_pergunta" ColumnName="id_pergunta" />
+                <ScalarProperty Name="resposta1" ColumnName="resposta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="EventosModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="Nascimento" ColumnName="Nascimento" />
+                <ScalarProperty Name="cadastro" ColumnName="cadastro" />
+                <ScalarProperty Name="CPF" ColumnName="CPF" />
+                <ScalarProperty Name="RG" ColumnName="RG" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="r_phone" ColumnName="r_phone" />
+                <ScalarProperty Name="cel_phone" ColumnName="cel_phone" />
+                <ScalarProperty Name="newsletter" ColumnName="newsletter" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="participante" TypeName="EventosModel.participante" StoreEntitySet="participante">
+            <EndProperty Name="usuario">
+              <ScalarProperty Name="login" ColumnName="login" />
+            </EndProperty>
+            <EndProperty Name="evento">
+              <ScalarProperty Name="Id" ColumnName="id_evento" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
