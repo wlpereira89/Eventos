@@ -9,15 +9,16 @@ namespace Modelo.PN
 {
     class pnEventos
     {
+
+
         public static bool Registrar(usuario u)
         {
-            try {
+            try
+            {
                 EventosEntities db = new EventosEntities();
-                usuario user = new usuario();
+                /*usuario user = new usuario();
                 //para mexer em um registro fazer a leitura de campo
                 user = db.usuarios.Find(u.CPF);// CONFERIR
-
-
                 user.login = u.login;
                 user.pass = u.pass;
                 user.Nome = u.login;
@@ -29,11 +30,10 @@ namespace Modelo.PN
                 user.RG = u.RG;
                 user.r_phone = u.r_phone;
                 user.cel_phone = u.cel_phone;
-                user.newsletter = u.newsletter;
+                user.newsletter = u.newsletter;*/
 
-                db.SaveChanges;
-
-
+                db.Entry(u);
+                db.SaveChanges();
                 return true;
 
             }
@@ -41,8 +41,22 @@ namespace Modelo.PN
             {
                 throw;
             }
+        }
+        public usuario findbByCPF(int CPF)
+        {
+            try
+            {
+                EventosEntities db = new EventosEntities();
+
+                EventosEntities db = new EventosEntities();
+                return db.usuarios.Find(CPF);
 
             }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
     }
 }
