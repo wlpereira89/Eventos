@@ -48,7 +48,7 @@ namespace Modelo.PN
             {
                 EventosEntities db = new EventosEntities();
 
-                EventosEntities db = new EventosEntities();
+                //EventosEntities db = new EventosEntities();
                 return db.usuarios.Find(CPF);
 
             }
