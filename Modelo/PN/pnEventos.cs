@@ -7,16 +7,27 @@ using System.Threading.Tasks;
 
 namespace Modelo.PN
 {
-    class pnEventos
+    public class pnEventos
     {
+        public static List<usuario> Listar()
+        {
+            try
+            {
+            EventosEntities db = new EventosEntities();
+            return (db.usuarios.ToList());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
-
-        public static bool Registrar(usuario u)
+        /*public static bool Registrar(usuario u)
         {
             try
             {
                 EventosEntities db = new EventosEntities();
-                /*usuario user = new usuario();
+                usuario user = new usuario();
                 //para mexer em um registro fazer a leitura de campo
                 user = db.usuarios.Find(u.CPF);// CONFERIR
                 user.login = u.login;
@@ -30,7 +41,7 @@ namespace Modelo.PN
                 user.RG = u.RG;
                 user.r_phone = u.r_phone;
                 user.cel_phone = u.cel_phone;
-                user.newsletter = u.newsletter;*/
+                user.newsletter = u.newsletter;
 
                 db.Entry(u);
                 db.SaveChanges();
@@ -56,7 +67,7 @@ namespace Modelo.PN
             {
                 throw;
             }
-        }
+        }*/
 
     }
 }

@@ -7,5 +7,5 @@
     [likes] SMALLINT NOT NULL, 
     PRIMARY KEY ([Id]), 
     CONSTRAINT [FK_comentario_ToTable] FOREIGN KEY ([login]) REFERENCES [usuario]([login]), 
-    CONSTRAINT [FK_comentario _ToTable_1] FOREIGN KEY ([id]) REFERENCES [evento]([Id])
+    CONSTRAINT [FK_comentario _ToTable_1] FOREIGN KEY ([id_evento]) REFERENCES [evento]([Id])
 )

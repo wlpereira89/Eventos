@@ -1,5 +1,5 @@
 ﻿@using Web.Models
-@model LoginViewModel
+@model IEnumerable<Modelo.DAO.usuario>
 @{
     ViewBag.Title = "Log in";
 }
@@ -56,6 +56,9 @@
             @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
         </section>
     </div>
+</div>
+<div>
+
 </div>
 
 @section Scripts {
