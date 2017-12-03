@@ -46,6 +46,7 @@
           </Key>
           <Property Name="login" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="id_evento" Type="int" Nullable="false" />
+          <Property Name="Presenca" Type="bit" />
         </EntityType>
         <EntityType Name="pergunta">
           <Key>
