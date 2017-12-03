@@ -1,0 +1,114 @@
+﻿@model Modelo.DAO.evento
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>evento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categoria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cancelado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cancelado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.palavra_chave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.palavra_chave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.palavra_chave2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.palavra_chave2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.limite_participantes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.limite_participantes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Local)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Local)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data_hr_ini)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_hr_ini)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data_hora_fim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_hora_fim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comentario.login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comentario.login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.evento_composto.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.evento_composto.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario.pass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario.pass)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

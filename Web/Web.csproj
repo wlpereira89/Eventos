@@ -190,8 +190,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\comentariosController.cs" />
+    <Compile Include="Controllers\eventoesController.cs" />
+    <Compile Include="Controllers\evento_compostoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\perguntasController.cs" />
+    <Compile Include="Controllers\respostasController.cs" />
     <Compile Include="Controllers\UsuariosC.cs" />
     <Compile Include="Controllers\usuariosController.cs" />
     <Compile Include="Global.asax.cs">
@@ -274,6 +279,31 @@
     <Content Include="Views\Home\Delete.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\eventoes\Create.cshtml" />
+    <Content Include="Views\eventoes\Delete.cshtml" />
+    <Content Include="Views\eventoes\Details.cshtml" />
+    <Content Include="Views\eventoes\Edit.cshtml" />
+    <Content Include="Views\eventoes\Index.cshtml" />
+    <Content Include="Views\respostas\Create.cshtml" />
+    <Content Include="Views\respostas\Delete.cshtml" />
+    <Content Include="Views\respostas\Details.cshtml" />
+    <Content Include="Views\respostas\Edit.cshtml" />
+    <Content Include="Views\respostas\Index.cshtml" />
+    <Content Include="Views\comentarios\Create.cshtml" />
+    <Content Include="Views\comentarios\Delete.cshtml" />
+    <Content Include="Views\comentarios\Details.cshtml" />
+    <Content Include="Views\comentarios\Edit.cshtml" />
+    <Content Include="Views\comentarios\Index.cshtml" />
+    <Content Include="Views\evento_composto\Create.cshtml" />
+    <Content Include="Views\evento_composto\Delete.cshtml" />
+    <Content Include="Views\evento_composto\Details.cshtml" />
+    <Content Include="Views\evento_composto\Edit.cshtml" />
+    <Content Include="Views\evento_composto\Index.cshtml" />
+    <Content Include="Views\perguntas\Create.cshtml" />
+    <Content Include="Views\perguntas\Delete.cshtml" />
+    <Content Include="Views\perguntas\Details.cshtml" />
+    <Content Include="Views\perguntas\Edit.cshtml" />
+    <Content Include="Views\perguntas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

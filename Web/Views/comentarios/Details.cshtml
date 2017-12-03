@@ -1,0 +1,58 @@
+﻿@model Modelo.DAO.comentario
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>comentario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_evento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_evento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comentario1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comentario1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.likes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.likes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.evento.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.evento.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario.pass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario.pass)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
