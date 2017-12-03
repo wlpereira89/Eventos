@@ -22,5 +22,6 @@ namespace Modelo.DAO
     
         public virtual evento evento { get; set; }
         public virtual usuario usuario { get; set; }
+        public virtual evento evento1 { get; set; }
     }
 }

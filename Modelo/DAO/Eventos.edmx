@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EventosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EventosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="comentario">
           <Key>
             <PropertyRef Name="Id" />
@@ -72,25 +72,25 @@
           <Property Name="pass" Type="nchar" MaxLength="8" Nullable="false" />
           <Property Name="Nome" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="Endereco" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="CEP" Type="int" Nullable="false" />
-          <Property Name="Nascimento" Type="date" Nullable="false" />
-          <Property Name="cadastro" Type="smalldatetime" Nullable="false" />
-          <Property Name="CPF" Type="int" Nullable="false" />
-          <Property Name="RG" Type="int" Nullable="false" />
+          <Property Name="CEP" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="Nascimento" Type="date" />
+          <Property Name="cadastro" Type="date" />
+          <Property Name="CPF" Type="nchar" MaxLength="14" Nullable="false" />
+          <Property Name="RG" Type="nchar" MaxLength="12" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="r_phone" Type="nchar" MaxLength="10" />
-          <Property Name="cel_phone" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="r_phone" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="cel_phone" Type="nchar" MaxLength="10" />
           <Property Name="newsletter" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_comentario _ToTable_1">
           <End Role="evento" Type="Self.evento" Multiplicity="1" />
-          <End Role="comentario" Type="Self.comentario" Multiplicity="0..1" />
+          <End Role="comentario" Type="Self.comentario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="evento">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="comentario">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="id_evento" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -235,8 +235,7 @@
             <End Role="resposta" EntitySet="resposta" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EventosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -251,6 +250,7 @@
           <Property Name="likes" Type="Int16" Nullable="false" />
           <NavigationProperty Name="evento" Relationship="Self.FK_comentario__ToTable_1" FromRole="comentario" ToRole="evento" />
           <NavigationProperty Name="usuario" Relationship="Self.FK_comentario_ToTable" FromRole="comentario" ToRole="usuario" />
+          <NavigationProperty Name="evento1" Relationship="EventosModel.FK_comentario__ToTable_11" FromRole="comentario" ToRole="evento" />
         </EntityType>
         <EntityType Name="evento">
           <Key>
@@ -273,6 +273,7 @@
           <NavigationProperty Name="usuario" Relationship="Self.FK_evento_ToTable_1" FromRole="evento" ToRole="usuario" />
           <NavigationProperty Name="perguntas" Relationship="Self.FK_perguntas_ToTable_1" FromRole="evento" ToRole="pergunta" />
           <NavigationProperty Name="usuarios" Relationship="Self.participante" FromRole="evento" ToRole="usuario" />
+          <NavigationProperty Name="comentarios" Relationship="EventosModel.FK_comentario__ToTable_11" FromRole="evento" ToRole="comentario" />
         </EntityType>
         <EntityType Name="evento_composto">
           <Key>
@@ -311,14 +312,14 @@
           <Property Name="pass" Type="String" MaxLength="8" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Nome" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Endereco" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CEP" Type="Int32" Nullable="false" />
-          <Property Name="Nascimento" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="cadastro" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CPF" Type="Int32" Nullable="false" />
-          <Property Name="RG" Type="Int32" Nullable="false" />
+          <Property Name="CEP" Type="String" Nullable="false" MaxLength="9" Unicode="true" FixedLength="true" />
+          <Property Name="Nascimento" Type="DateTime" Precision="0" />
+          <Property Name="cadastro" Type="DateTime" Precision="0" />
+          <Property Name="CPF" Type="String" Nullable="false" MaxLength="14" Unicode="true" FixedLength="true" />
+          <Property Name="RG" Type="String" Nullable="false" MaxLength="12" Unicode="true" FixedLength="true" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="r_phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="cel_phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="r_phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="cel_phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="newsletter" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="comentarios" Relationship="Self.FK_comentario_ToTable" FromRole="usuario" ToRole="comentario" />
           <NavigationProperty Name="eventoes" Relationship="Self.FK_evento_ToTable_1" FromRole="usuario" ToRole="evento" />
@@ -452,7 +453,23 @@
             <End Role="usuario" EntitySet="usuarios" />
             <End Role="evento" EntitySet="eventoes" />
           </AssociationSet>
+          <AssociationSet Name="FK_comentario__ToTable_11" Association="EventosModel.FK_comentario__ToTable_11">
+            <End Role="evento" EntitySet="eventoes" />
+            <End Role="comentario" EntitySet="comentarios" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_comentario__ToTable_11">
+          <End Type="EventosModel.evento" Role="evento" Multiplicity="1" />
+          <End Type="EventosModel.comentario" Role="comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="evento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="comentario">
+              <PropertyRef Name="id_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

@@ -19,6 +19,7 @@ namespace Modelo.DAO
         {
             this.perguntas = new HashSet<pergunta>();
             this.usuarios = new HashSet<usuario>();
+            this.comentarios = new HashSet<comentario>();
         }
     
         public int Id { get; set; }
@@ -41,5 +42,7 @@ namespace Modelo.DAO
         public virtual ICollection<pergunta> perguntas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<usuario> usuarios { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<comentario> comentarios { get; set; }
     }
 }

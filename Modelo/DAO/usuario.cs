@@ -27,11 +27,11 @@ namespace Modelo.DAO
         public string pass { get; set; }
         public string Nome { get; set; }
         public string Endereco { get; set; }
-        public int CEP { get; set; }
-        public System.DateTime Nascimento { get; set; }
-        public System.DateTime cadastro { get; set; }
-        public int CPF { get; set; }
-        public int RG { get; set; }
+        public string CEP { get; set; }
+        public Nullable<System.DateTime> Nascimento { get; set; }
+        public Nullable<System.DateTime> cadastro { get; set; }
+        public string CPF { get; set; }
+        public string RG { get; set; }
         public string email { get; set; }
         public string r_phone { get; set; }
         public string cel_phone { get; set; }
