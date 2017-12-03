@@ -17,9 +17,9 @@ namespace Modelo.DAO
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public evento()
         {
-            this.perguntas = new HashSet<pergunta>();
-            this.usuarios = new HashSet<usuario>();
             this.comentarios = new HashSet<comentario>();
+            this.participantes = new HashSet<participante>();
+            this.perguntas = new HashSet<pergunta>();
         }
     
         public int Id { get; set; }
@@ -35,14 +35,13 @@ namespace Modelo.DAO
         public System.DateTime data_hr_ini { get; set; }
         public System.DateTime data_hora_fim { get; set; }
     
-        public virtual comentario comentario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<comentario> comentarios { get; set; }
         public virtual evento_composto evento_composto { get; set; }
         public virtual usuario usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<participante> participantes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pergunta> perguntas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<usuario> usuarios { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<comentario> comentarios { get; set; }
     }
 }

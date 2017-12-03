@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Modelo.DAO;
-using Modelo.PN;
 
 namespace Web.Controllers
 {
@@ -17,8 +16,10 @@ namespace Web.Controllers
 
         // GET: usuarios
         public ActionResult Index()
-        {
-            return View(pnEventos.Listar());
+        {            
+
+            return View(db.usuarios.ToList());
+            
         }
 
         // GET: usuarios/Details/5

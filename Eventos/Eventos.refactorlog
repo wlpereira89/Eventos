@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="de678840-a60c-4415-a559-0b14c1df6f7c" ChangeDateTime="12/03/2017 20:09:41">
+    <Property Name="ElementName" Value="[dbo].[usuario].[email]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[usuario]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Email" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="aecbbd07-803f-4195-a018-555747406971" ChangeDateTime="12/03/2017 22:11:01">
+    <Property Name="ElementName" Value="[dbo].[usuario].[Email]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[usuario]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="E-mail" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1e4be8de-5d7a-4096-aa40-dda237303d28" ChangeDateTime="12/03/2017 22:48:53">
+    <Property Name="ElementName" Value="[dbo].[usuario].[E-mail]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[usuario]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Email" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="037b4268-8861-434b-a28d-7d5111441291" ChangeDateTime="12/03/2017 23:17:04">
+    <Property Name="ElementName" Value="[dbo].[participante].[presenca]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[participante]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Presença" />
+  </Operation>
+</Operations>

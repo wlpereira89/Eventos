@@ -52,6 +52,9 @@
     <Compile Include="DAO\comentario.cs">
       <DependentUpon>Eventos.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAO\C__RefactorLog.cs">
+      <DependentUpon>Eventos.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAO\evento.cs">
       <DependentUpon>Eventos.tt</DependentUpon>
     </Compile>
@@ -71,6 +74,9 @@
       <DependentUpon>Eventos.edmx</DependentUpon>
     </Compile>
     <Compile Include="DAO\evento_composto.cs">
+      <DependentUpon>Eventos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\participante.cs">
       <DependentUpon>Eventos.tt</DependentUpon>
     </Compile>
     <Compile Include="DAO\pergunta.cs">
@@ -97,6 +103,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="DAO\Eventos.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Eventos.edmx</DependentUpon>
@@ -108,9 +117,5 @@
       <LastGenOutput>Eventos.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

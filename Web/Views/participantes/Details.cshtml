@@ -1,0 +1,42 @@
+﻿@model Modelo.DAO.participante
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>participante</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Presenca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Presenca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.evento.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.evento.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario.pass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario.pass)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

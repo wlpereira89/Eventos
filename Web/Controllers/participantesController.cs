@@ -10,107 +10,116 @@ using Modelo.DAO;
 
 namespace Web.Controllers
 {
-    public class UsuariosC : Controller
+    public class participantesController : Controller
     {
         private EventosEntities db = new EventosEntities();
 
-        // GET: UsuariosC
+        // GET: participantes
         public ActionResult Index()
         {
-            return View(db.usuarios.ToList());
+            var participantes = db.participantes.Include(p => p.evento).Include(p => p.usuario);
+            return View(participantes.ToList());
         }
 
-        // GET: UsuariosC/Details/5
+        // GET: participantes/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            usuario usuario = db.usuarios.Find(id);
-            if (usuario == null)
+            participante participante = db.participantes.Find(id);
+            if (participante == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            return View(participante);
         }
 
-        // GET: UsuariosC/Create
+        // GET: participantes/Create
         public ActionResult Create()
         {
+            ViewBag.id_evento = new SelectList(db.eventoes, "Id", "Nome");
+            ViewBag.login = new SelectList(db.usuarios, "login", "pass");
             return View();
         }
 
-        // POST: UsuariosC/Create
+        // POST: participantes/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "login,pass,Nome,Endereco,CEP,Nascimento,cadastro,CPF,RG,email,r_phone,cel_phone,newsletter")] usuario usuario)
+        public ActionResult Create([Bind(Include = "login,id_evento,Presenca")] participante participante)
         {
             if (ModelState.IsValid)
             {
-                db.usuarios.Add(usuario);
+                db.participantes.Add(participante);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(usuario);
+            ViewBag.id_evento = new SelectList(db.eventoes, "Id", "Nome", participante.id_evento);
+            ViewBag.login = new SelectList(db.usuarios, "login", "pass", participante.login);
+            return View(participante);
         }
 
-        // GET: UsuariosC/Edit/5
+        // GET: participantes/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            usuario usuario = db.usuarios.Find(id);
-            if (usuario == null)
+            participante participante = db.participantes.Find(id);
+            if (participante == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            ViewBag.id_evento = new SelectList(db.eventoes, "Id", "Nome", participante.id_evento);
+            ViewBag.login = new SelectList(db.usuarios, "login", "pass", participante.login);
+            return View(participante);
         }
 
-        // POST: UsuariosC/Edit/5
+        // POST: participantes/Edit/5
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "login,pass,Nome,Endereco,CEP,Nascimento,cadastro,CPF,RG,email,r_phone,cel_phone,newsletter")] usuario usuario)
+        public ActionResult Edit([Bind(Include = "login,id_evento,Presenca")] participante participante)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(usuario).State = EntityState.Modified;
+                db.Entry(participante).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(usuario);
+            ViewBag.id_evento = new SelectList(db.eventoes, "Id", "Nome", participante.id_evento);
+            ViewBag.login = new SelectList(db.usuarios, "login", "pass", participante.login);
+            return View(participante);
         }
 
-        // GET: UsuariosC/Delete/5
+        // GET: participantes/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            usuario usuario = db.usuarios.Find(id);
-            if (usuario == null)
+            participante participante = db.participantes.Find(id);
+            if (participante == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            return View(participante);
         }
 
-        // POST: UsuariosC/Delete/5
+        // POST: participantes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            usuario usuario = db.usuarios.Find(id);
-            db.usuarios.Remove(usuario);
+            participante participante = db.participantes.Find(id);
+            db.participantes.Remove(participante);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

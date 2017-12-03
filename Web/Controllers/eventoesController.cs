@@ -17,7 +17,7 @@ namespace Web.Controllers
         // GET: eventoes
         public ActionResult Index()
         {
-            var eventoes = db.eventoes.Include(e => e.comentario).Include(e => e.evento_composto).Include(e => e.usuario);
+            var eventoes = db.eventoes.Include(e => e.comentarios).Include(e => e.evento_composto).Include(e => e.usuario);
             return View(eventoes.ToList());
         }
 

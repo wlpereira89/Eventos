@@ -19,8 +19,8 @@ namespace Modelo.DAO
         {
             this.comentarios = new HashSet<comentario>();
             this.eventoes = new HashSet<evento>();
+            this.participantes = new HashSet<participante>();
             this.respostas = new HashSet<resposta>();
-            this.eventoes1 = new HashSet<evento>();
         }
     
         public string login { get; set; }
@@ -32,7 +32,7 @@ namespace Modelo.DAO
         public Nullable<System.DateTime> cadastro { get; set; }
         public string CPF { get; set; }
         public string RG { get; set; }
-        public string email { get; set; }
+        public string Email { get; set; }
         public string r_phone { get; set; }
         public string cel_phone { get; set; }
         public bool newsletter { get; set; }
@@ -42,8 +42,8 @@ namespace Modelo.DAO
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<evento> eventoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<resposta> respostas { get; set; }
+        public virtual ICollection<participante> participantes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<evento> eventoes1 { get; set; }
+        public virtual ICollection<resposta> respostas { get; set; }
     }
 }

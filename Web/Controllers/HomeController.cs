@@ -59,14 +59,14 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "login,pass,Nome,Endereco,CEP,Nascimento,cadastro,CPF,RG,email,r_phone,cel_phone,newsletter")] usuario usuario)
         {
-            //if (ModelState.IsValid)
-            //{
+           // if (ModelState.IsValid)
+           // {
             db.usuarios.Add(usuario);
             db.SaveChanges();
             return RedirectToAction("Index");
-            //}
+           // }
 
-            return View(usuario);
+            //return View(usuario);
         }
 
         // GET: UsuariosC/Edit/5

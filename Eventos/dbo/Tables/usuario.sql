@@ -9,7 +9,7 @@
 	[cadastro] DATE NULL,
     [CPF] NCHAR(14) NOT NULL, 
 	[RG] NCHAR(12) NOT NULL,
-    [email] NVARCHAR(50) NOT NULL, 
+    [Email] NVARCHAR(50) NOT NULL, 
     [r_phone] NCHAR(10) NOT NULL, 
     [cel_phone] NCHAR(10) NULL, 
     [newsletter] BIT NOT NULL, 

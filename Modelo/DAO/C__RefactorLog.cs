@@ -12,15 +12,8 @@ namespace Modelo.DAO
     using System;
     using System.Collections.Generic;
     
-    public partial class comentario
+    public partial class C__RefactorLog
     {
-        public int Id { get; set; }
-        public string login { get; set; }
-        public int id_evento { get; set; }
-        public string comentario1 { get; set; }
-        public short likes { get; set; }
-    
-        public virtual evento evento { get; set; }
-        public virtual usuario usuario { get; set; }
+        public System.Guid OperationKey { get; set; }
     }
 }
