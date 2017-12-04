@@ -1,7 +1,8 @@
-﻿@model Modelo.DAO.usuario
+﻿@using Web.Models
+@model Modelo.DAO.usuario
 
 @{
-        ViewBag.Title = "Login";
+    ViewBag.Title = "Login";
 }
 <h2>Login</h2>
 @using (Html.BeginForm("Login", "Home", FormMethod.Post))
@@ -15,26 +16,36 @@
             @ViewBag.Message
         </div>
     }
-    <table>
-        <tr>
-            <td>@Html.LabelFor(a => a.login)</td>
-            <td>@Html.TextBoxFor(a => a.login)</td>
-            <td>@Html.ValidationMessageFor(a => a.login)</td>
-        </tr>
-        <tr>
-            <td> @Html.LabelFor(a => a.pass)</td>
-            <td> @Html.PasswordFor(a => a.pass) </td>
-            <td> @Html.ValidationMessageFor(a => a.pass) </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Login" />
-            </td>
-            <td></td>
-        </tr>
-    </table>
-}
-@section Scripts{
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    <div class="row">
+        <div class="col-md-8">
+            <section id="loginForm">
+                <table>
+                    <tr>
+                        <td>@Html.LabelFor(a => a.login)</td>
+                        <td>@Html.TextBoxFor(a => a.login)</td>
+                        <td>@Html.ValidationMessageFor(a => a.login)</td>
+                    </tr>
+                    <tr>
+                        <td> @Html.LabelFor(a => a.pass)</td>
+                        <td> @Html.PasswordFor(a => a.pass) </td>
+                        <td> @Html.ValidationMessageFor(a => a.pass) </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" value="Login" />
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+                }
+            </section>
+        </div>
+      
+    </div>
+    <div>
+    </div>
+        @section Scripts{
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+    }

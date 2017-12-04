@@ -138,5 +138,25 @@ namespace Web.Controllers
             }
             base.Dispose(disposing);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(usuario u)
+        {
+            // esta action trata o post (login)
+            if (ModelState.IsValid) //verifica se é válido
+            {
+                using (EventosEntities dc = new EventosEntities())
+                {
+                    var v = dc.usuarios.Where(a => a.login.Equals(u.login) && a.pass.Equals(u.pass)).FirstOrDefault();
+                    if (v != null)
+                    {
+                        Session["usuarioLogadoID"] = v.login.ToString();
+                        Session["nomeUsuarioLogado"] = v.login.ToString();
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+            return View(u);
+        }
     }
 }
