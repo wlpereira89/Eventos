@@ -16,7 +16,11 @@ namespace Web.Controllers
         {
             return View(db.usuarios.ToList());
         }
-
+        public ActionResult Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

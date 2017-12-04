@@ -11,7 +11,8 @@ namespace Modelo.DAO
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,7 +23,9 @@ namespace Modelo.DAO
             this.participantes = new HashSet<participante>();
             this.respostas = new HashSet<resposta>();
         }
-    
+        public string Email { get; set; }
+        [Display(Name = "Login")]
+        [Required(ErrorMessage = "Informe o nome do usuário", AllowEmptyStrings = false)]
         public string login { get; set; }
         public string pass { get; set; }
         public string Nome { get; set; }
@@ -32,7 +35,9 @@ namespace Modelo.DAO
         public Nullable<System.DateTime> cadastro { get; set; }
         public string CPF { get; set; }
         public string RG { get; set; }
-        public string Email { get; set; }
+
+
+        [Display(Name = "Telefone Residencial")]
         public string r_phone { get; set; }
         public string cel_phone { get; set; }
         public bool newsletter { get; set; }

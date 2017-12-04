@@ -22,6 +22,7 @@ namespace Modelo.PN
             }
         }
 
+
         /*public static bool Registrar(usuario u)
         {
             try
