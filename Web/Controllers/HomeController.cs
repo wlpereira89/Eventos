@@ -6,11 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-
+using Modelo.PN;
 namespace Web.Controllers
 {
+    
     public class HomeController : Controller
     {
+        private bool Logado { get; set; }
         private EventosEntities db = new EventosEntities();
         public ActionResult Index()
         {
@@ -151,12 +153,18 @@ namespace Web.Controllers
                     if (v != null)
                     {
                         Session["usuarioLogadoID"] = v.login.ToString();
-                        Session["nomeUsuarioLogado"] = v.login.ToString();
+                        Session["nomeUsuarioLogado"] = v.Nome.ToString();
+                        pnEventos.Logado = true;
                         return RedirectToAction("Index");
                     }
                 }
             }
             return View(u);
+        }
+        public ActionResult LogOff()
+        {
+            pnEventos.Logado = false;
+            return RedirectToAction("Index");
         }
     }
 }

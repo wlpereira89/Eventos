@@ -9,6 +9,7 @@ namespace Modelo.PN
 {
     public class pnEventos
     {
+        public static bool Logado { get; set; }
         public static List<usuario> Listar()
         {
             try
@@ -69,6 +70,6 @@ namespace Modelo.PN
                 throw;
             }
         }*/
-
+        
     }
 }
