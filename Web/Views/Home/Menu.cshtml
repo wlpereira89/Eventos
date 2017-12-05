@@ -11,22 +11,30 @@
                     @Html.ActionLink("Evento", "Index", "Eventoes")
                     <ul class="submenu-1">
                         <li>
-                            @Html.ActionLink("Evento", "Create", "Eventoes")
+                            @Html.ActionLink("Criar", "Create", "Eventoes")
                         </li>
                         <li>
-                            @Html.ActionLink("Editar Evento", "Editar", "Eventoes")
+                            @Html.ActionLink("Editar", "Editar", "Eventoes")
                         </li>
                         <li>
-                            @Html.ActionLink("Listar Evento", "Index", "Eventoes")
+                            @Html.ActionLink("Listar", "Index", "Eventoes")
+                        </li>
+                    </ul>
+                <li>
+                    @Html.ActionLink("Eventos Compostos", "Index", "Evento_composto")
+                    <ul class="submenu-1">
+                        <li>
+                            @Html.ActionLink("Criar", "Create", "Evento_composto")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Editar", "Editar", "Evento_composto")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Listar", "Index", "Evento_composto")
                         </li>
                     </ul>
                 </li>
-                <li>
-                    @Html.ActionLink("Editar Evento", "Editar", "Eventoes")
-                </li>
-                <li>
-                    @Html.ActionLink("Listar Evento", "Index", "Eventoes")
-                </li>
+                
             </ul>
         </nav>
 

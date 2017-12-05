@@ -12,7 +12,7 @@ namespace Web.Controllers
     
     public class HomeController : Controller
     {
-        private bool Logado { get; set; }
+        
         private EventosEntities db = new EventosEntities();
         public ActionResult Index()
         {
@@ -23,7 +23,7 @@ namespace Web.Controllers
                 
             return View();
         }
-        public ActionResult Listar ()
+        public ActionResult Lista ()
         {
             return View(db.usuarios.ToList());
         }
