@@ -1,7 +1,22 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "Menu";
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<div class ="container">
+    <nav id="nav">
+        <ul class="nav-primary">
+            <li class="category">
+                @Html.ActionLink("Criar Evento", "Create", "Eventoes")                
+            </li>
+            <li class="category">
+                @Html.ActionLink("Editar Evento", "Editar", "Eventoes")  
+            </li>
+            <li class="category">
+                @Html.ActionLink("Listar Evento", "Index", "Eventoes")  
+            </li>
+        </ul>
+    </nav>
+
+</div>
