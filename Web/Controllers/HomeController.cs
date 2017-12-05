@@ -155,6 +155,7 @@ namespace Web.Controllers
                         Session["usuarioLogadoID"] = v.login.ToString();
                         Session["nomeUsuarioLogado"] = v.Nome.ToString();
                         pnEventos.Logado = true;
+
                         return RedirectToAction("Index");
                     }
                 }
@@ -163,6 +164,7 @@ namespace Web.Controllers
         }
         public ActionResult LogOff()
         {
+            Session.Clear();
             pnEventos.Logado = false;
             return RedirectToAction("Index");
         }
