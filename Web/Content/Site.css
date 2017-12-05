@@ -22,3 +22,37 @@ select,
 textarea {
     max-width: 280px;
 }
+.continuar .btn-next {
+    cursor: pointer;
+    border: none;
+    padding: 10px 18px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 14px;
+    text-shadow: none;
+    background: #000;
+    text-transform: uppercase;
+}
+.continuar {
+    position: absolute;
+    right: 120px;
+}
+.voltar a {
+    cursor: pointer;
+    border: none;
+    padding: 10px 18px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 14px;
+    text-shadow: none;
+    background: #000;
+    text-transform: uppercase;
+    border-radius: 4px;
+}
+.voltar a:hover {
+    text-decoration: none;
+    opacity: 0.6;
+}
+.continuar:hover {
+    opacity: 0.6;
+}
