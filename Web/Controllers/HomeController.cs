@@ -16,7 +16,21 @@ namespace Web.Controllers
         private EventosEntities db = new EventosEntities();
         public ActionResult Index()
         {
+            if (pnEventos.Logado)
+            {
+                return RedirectToAction("Menu");
+            }
+                
+            return View();
+        }
+        public ActionResult Listar ()
+        {
             return View(db.usuarios.ToList());
+        }
+
+        public ActionResult Menu()
+        {            
+            return View();
         }
         public ActionResult Login(string returnUrl)
         {

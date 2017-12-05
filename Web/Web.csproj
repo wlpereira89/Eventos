@@ -312,6 +312,8 @@
     <Content Include="Views\participantes\Edit.cshtml" />
     <Content Include="Views\participantes\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Lista.cshtml" />
+    <Content Include="Views\Home\Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
