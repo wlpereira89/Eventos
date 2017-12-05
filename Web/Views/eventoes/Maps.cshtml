@@ -1,0 +1,84 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <script src="https://maps.googleapis.com/maps/api/js"></script>
+
+            <script language="javascript" type="text/javascript">
+                var exibirCaminhos;
+                var servicoDirecao = new google.maps.DirectionsService();
+
+                function IniciarMapa() {
+                    exibirCaminhos = new google.maps.DirectionsRenderer();
+                    var latlng = new google.maps.LatLng(-15.682543, -47.978874);
+                    var opcoes =
+                        {
+                            zoom: 8,
+                            center: latlng,
+                            mapTypeId: google.maps.MapTypeId.ROADMAP
+                        };
+                    var mapa = new google.maps.Map(document.getElementById("mapa"), opcoes);
+                    exibirCaminhos.setMap(mapa);
+                    exibirCaminhos.setPanel(document.getElementById('direcaopainel'));
+                    var controle = document.getElementById('controle');
+                    controle.style.display = 'block';
+                }
+
+                function calcularRota() {
+                    var start = document.getElementById('valorinicio').value;
+                    var end = document.getElementById('valorfinal').value;
+                    var request = {
+                        origin: start,
+                        destination: end,
+                        travelMode: google.maps.DirectionsTravelMode.DRIVING
+                    };
+                    servicoDirecao.route(request, function (response, status) {
+                        if (status == google.maps.DirectionsStatus.OK) {
+                            exibirCaminhos.setDirections(response);
+                        }
+                    });
+
+                }
+                function Button1_onclick() {
+                    calcularRota();
+                }
+                window.onload = IniciarMapa;
+            </script>
+            <table id="controle">
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>De:</td>
+                                <td>
+                                    <input id="valorinicio" type="text" style="width: 305px" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Para:</td>
+                                <td><input id="valorfinal" type="text" style="width: 301px" /></td>
+                            </tr>
+                            <tr>
+                                <td align="right">
+                                    <input id="Button1" type="button" value="Obter Caminho" onclick="return Button1_onclick()" />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top">
+                        <div id="direcaopainel" style="height: 390px;overflow: auto"></div>
+                    </td>
+                    <td valign="top">
+                        <div id="mapa" style="height: 390px; width: 489px"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+</html>

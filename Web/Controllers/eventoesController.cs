@@ -14,6 +14,11 @@ namespace Web.Controllers
     {
         private EventosEntities db = new EventosEntities();
 
+        public ActionResult Lista()
+        {
+            return View(db.eventoes.ToList());
+        }
+
         // GET: eventoes
         public ActionResult Index()
         {
@@ -52,12 +57,9 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Categoria,id_principal,Nome,Responsavel,Cancelado,palavra_chave,palavra_chave2,limite_participantes,Local,data_hr_ini,data_hora_fim")] evento evento)
         {
-            if (ModelState.IsValid)
-            {
-                db.eventoes.Add(evento);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            db.eventoes.Add(evento);
+            db.SaveChanges();
+            return RedirectToAction("Index");
 
             ViewBag.Id = new SelectList(db.comentarios, "Id", "login", evento.Id);
             ViewBag.id_principal = new SelectList(db.evento_composto, "Id", "Nome", evento.id_principal);
@@ -117,6 +119,10 @@ namespace Web.Controllers
             return View(evento);
         }
 
+        public ActionResult Maps()
+        {
+            return View();
+        }
         // POST: eventoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

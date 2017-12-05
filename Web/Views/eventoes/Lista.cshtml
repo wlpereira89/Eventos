@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Modelo.DAO.evento>
+
+@{
+    ViewBag.Title = "Lista";
+}
+
+<h2>Exeibição de Eventos</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome);
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Local);
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.perguntas);
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Responsavel);
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria);
+        </th>
+        <th>
+            <div>Local</div>
+        </th>
+        <th>Ações</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.Nome);
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Local);
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.perguntas);
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Responsavel);
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Categoria);
+            </td>
+            <td>
+                <H5> UTFPR </H5>
+            </td>
+            <td>
+                @Html.ActionLink("Como chegar?", "Maps", new { @class = "btn btn-default" })|
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.login })|
+                    @Html.ActionLink("Details", "Details", new { id = item.login })|
+                    @Html.ActionLink("Delete", "Delete", new { id = item.login })*@
+            </td>
+
+        </tr>
+    }
+
+</table>

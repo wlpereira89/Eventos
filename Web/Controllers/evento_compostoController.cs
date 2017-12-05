@@ -14,6 +14,12 @@ namespace Web.Controllers
     {
         private EventosEntities db = new EventosEntities();
 
+
+        public ActionResult Lista()
+        {
+            return View(db.evento_composto.ToList());
+        }
+
         // GET: evento_composto
         public ActionResult Index()
         {

@@ -16,12 +16,7 @@ namespace Web
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
-            routes.MapRoute(
-                name: "Evento",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "evento", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Eventoes", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
