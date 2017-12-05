@@ -30,7 +30,12 @@ namespace Web.Controllers
 
         public ActionResult Menu()
         {            
-            return View();
+            if (pnEventos.Logado)
+            {
+                return View();
+            }
+            return RedirectToAction("Index");
+
         }
         public ActionResult Login(string returnUrl)
         {

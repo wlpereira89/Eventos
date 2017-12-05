@@ -4,19 +4,33 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<div class ="container">
-    <nav id="nav">
-        <ul class="nav-primary">
-            <li class="category">
-                @Html.ActionLink("Criar Evento", "Create", "Eventoes")                
-            </li>
-            <li class="category">
-                @Html.ActionLink("Editar Evento", "Editar", "Eventoes")  
-            </li>
-            <li class="category">
-                @Html.ActionLink("Listar Evento", "Index", "Eventoes")  
-            </li>
-        </ul>
-    </nav>
+    <div class="container">
+        <nav id="nav">
+            <ul class="menu">
+                <li>
+                    @Html.ActionLink("Evento", "Index", "Eventoes")
+                    <ul class="submenu-1">
+                        <li>
+                            @Html.ActionLink("Evento", "Create", "Eventoes")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Editar Evento", "Editar", "Eventoes")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Listar Evento", "Index", "Eventoes")
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    @Html.ActionLink("Editar Evento", "Editar", "Eventoes")
+                </li>
+                <li>
+                    @Html.ActionLink("Listar Evento", "Index", "Eventoes")
+                </li>
+            </ul>
+        </nav>
 
-</div>
+    </div>
+
+
+
