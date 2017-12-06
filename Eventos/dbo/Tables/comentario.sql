@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[comentario]
 (
-	[Id] INT NOT NULL,
+	[Id] INT NOT NULL IDENTITY,
 	[login] NVARCHAR(30) NOT NULL , 
     [id_evento] INT NOT NULL, 
     [comentario] NVARCHAR(MAX) NOT NULL, 

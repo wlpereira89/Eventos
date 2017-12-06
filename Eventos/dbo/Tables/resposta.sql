@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[resposta]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
 	[usuario] NVARCHAR(30) NOT NULL,
 	[id_pergunta] INT NOT NULL, 
     [resposta] NVARCHAR(MAX) NULL, 
