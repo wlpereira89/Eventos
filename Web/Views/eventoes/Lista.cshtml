@@ -10,51 +10,75 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nome);
+            @Html.DisplayNameFor(model => model.Categoria)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Local);
+            @Html.DisplayNameFor(model => model.Nome)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.perguntas);
+            @Html.DisplayNameFor(model => model.Cancelado)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Responsavel);
+            @Html.DisplayNameFor(model => model.palavra_chave)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Categoria);
+            @Html.DisplayNameFor(model => model.palavra_chave2)
         </th>
         <th>
-            <div>Local</div>
+            @Html.DisplayNameFor(model => model.limite_participantes)
         </th>
-        <th>Ações</th>
+        <th>
+            @Html.DisplayNameFor(model => model.Local)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.data_hr_ini)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.data_hora_fim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.evento_composto.Nome)
+        </th>
+        <th></th>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(model => item.Nome);
+                @Html.DisplayFor(modelItem => item.Categoria)
             </td>
             <td>
-                @Html.DisplayFor(model => item.Local);
+                @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(model => item.perguntas);
+                @Html.DisplayFor(modelItem => item.Cancelado)
             </td>
             <td>
-                @Html.DisplayFor(model => item.Responsavel);
+                @Html.DisplayFor(modelItem => item.palavra_chave)
             </td>
             <td>
-                @Html.DisplayFor(model => item.Categoria);
+                @Html.DisplayFor(modelItem => item.palavra_chave2)
             </td>
             <td>
-                <H5> UTFPR </H5>
+                @Html.DisplayFor(modelItem => item.limite_participantes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Local)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.data_hr_ini)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.data_hora_fim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.evento_composto.Nome)
             </td>
             <td>
                 @Html.ActionLink("Como chegar?", "Maps", new { @class = "btn btn-default" })|
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.login })|
-                    @Html.ActionLink("Details", "Details", new { id = item.login })|
-                    @Html.ActionLink("Delete", "Delete", new { id = item.login })*@
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
 
         </tr>
