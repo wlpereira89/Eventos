@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[evento]
 (
-	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY (1,1), 
     [Categoria] SMALLINT NOT NULL, 
     [id_principal] INT NULL, 
     [Nome] NCHAR(50) NOT NULL, 

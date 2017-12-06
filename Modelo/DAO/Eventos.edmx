@@ -15,7 +15,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="login" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="id_evento" Type="int" Nullable="false" />
           <Property Name="comentario" Type="nvarchar(max)" Nullable="false" />
@@ -25,7 +25,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Categoria" Type="smallint" Nullable="false" />
           <Property Name="id_principal" Type="int" />
           <Property Name="Nome" Type="nchar" MaxLength="50" Nullable="false" />
@@ -42,7 +42,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Nome" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="participante">
@@ -58,7 +58,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="id_evento" Type="int" Nullable="false" />
           <Property Name="pergunta" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
@@ -66,7 +66,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="usuario" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="id_pergunta" Type="int" Nullable="false" />
           <Property Name="resposta" Type="nvarchar(max)" />
@@ -257,7 +257,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="id_evento" Type="Int32" Nullable="false" />
           <Property Name="comentario1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -269,7 +269,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Categoria" Type="Int16" Nullable="false" />
           <Property Name="id_principal" Type="Int32" />
           <Property Name="Nome" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
@@ -291,7 +291,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nome" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="eventoes" Relationship="Self.FK_evento_ToTable" FromRole="evento_composto" ToRole="evento" />
         </EntityType>
@@ -310,7 +310,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_evento" Type="Int32" Nullable="false" />
           <Property Name="pergunta1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="evento" Relationship="Self.FK_perguntas_ToTable_1" FromRole="pergunta" ToRole="evento" />
@@ -320,7 +320,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="usuario" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="id_pergunta" Type="Int32" Nullable="false" />
           <Property Name="resposta1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
