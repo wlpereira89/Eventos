@@ -55,7 +55,7 @@ namespace Web.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Categoria,id_principal,Nome,Responsavel,Cancelado,palavra_chave,palavra_chave2,limite_participantes,Local,data_hr_ini,data_hora_fim")] evento evento)
+        public ActionResult Create([Bind(Include = "Categoria,id_principal,Nome,Responsavel,Cancelado,palavra_chave,palavra_chave2,limite_participantes,Local,data_hr_ini,data_hora_fim")] evento evento)
         {
             db.eventoes.Add(evento);
             db.SaveChanges();
@@ -90,7 +90,7 @@ namespace Web.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Categoria,id_principal,Nome,Responsavel,Cancelado,palavra_chave,palavra_chave2,limite_participantes,Local,data_hr_ini,data_hora_fim")] evento evento)
+        public ActionResult Edit([Bind(Include = "Categoria,id_principal,Nome,Responsavel,Cancelado,palavra_chave,palavra_chave2,limite_participantes,Local,data_hr_ini,data_hora_fim")] evento evento)
         {
             if (ModelState.IsValid)
             {

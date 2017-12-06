@@ -49,7 +49,7 @@ namespace Web.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,login,id_evento,comentario1,likes")] comentario comentario)
+        public ActionResult Create([Bind(Include = "login,id_evento,comentario1,likes")] comentario comentario)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Web.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,login,id_evento,comentario1,likes")] comentario comentario)
+        public ActionResult Edit([Bind(Include = "login,id_evento,comentario1,likes")] comentario comentario)
         {
             if (ModelState.IsValid)
             {

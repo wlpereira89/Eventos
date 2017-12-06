@@ -52,10 +52,10 @@ namespace Web.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome")] evento_composto evento_composto)
+        public ActionResult Create([Bind(Include = "Nome")] evento_composto evento_composto)
         {
             if (ModelState.IsValid)
-            {
+            {            
                 db.evento_composto.Add(evento_composto);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -84,7 +84,7 @@ namespace Web.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome")] evento_composto evento_composto)
+        public ActionResult Edit([Bind(Include = "Nome")] evento_composto evento_composto)
         {
             if (ModelState.IsValid)
             {

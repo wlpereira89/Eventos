@@ -49,7 +49,7 @@ namespace Web.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,usuario,id_pergunta,resposta1")] resposta resposta)
+        public ActionResult Create([Bind(Include = "usuario,id_pergunta,resposta1")] resposta resposta)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Web.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,usuario,id_pergunta,resposta1")] resposta resposta)
+        public ActionResult Edit([Bind(Include = "usuario,id_pergunta,resposta1")] resposta resposta)
         {
             if (ModelState.IsValid)
             {
