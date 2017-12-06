@@ -32,8 +32,8 @@ namespace Modelo.DAO
         public string palavra_chave2 { get; set; }
         public short limite_participantes { get; set; }
         public string Local { get; set; }
-        public Nullable<System.DateTime> data_hr_ini { get; set; }
-        public Nullable<System.DateTime> data_hora_fim { get; set; }
+        public System.DateTime data_hr_ini { get; set; }
+        public System.DateTime data_hora_fim { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<comentario> comentarios { get; set; }

@@ -15,7 +15,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="login" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="id_evento" Type="int" Nullable="false" />
           <Property Name="comentario" Type="nvarchar(max)" Nullable="false" />
@@ -25,7 +25,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Categoria" Type="smallint" Nullable="false" />
           <Property Name="id_principal" Type="int" />
           <Property Name="Nome" Type="nchar" MaxLength="50" Nullable="false" />
@@ -35,14 +35,14 @@
           <Property Name="palavra_chave2" Type="nvarchar" MaxLength="50" />
           <Property Name="limite_participantes" Type="smallint" Nullable="false" />
           <Property Name="Local" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="data_hr_ini" Type="datetime" />
-          <Property Name="data_hora_fim" Type="datetime" />
+          <Property Name="data_hr_ini" Type="smalldatetime" Nullable="false" />
+          <Property Name="data_hora_fim" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <EntityType Name="evento_composto">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nome" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="participante">
@@ -51,14 +51,14 @@
             <PropertyRef Name="id_evento" />
           </Key>
           <Property Name="login" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="id_evento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_evento" Type="int" Nullable="false" />
           <Property Name="Presenca" Type="bit" />
         </EntityType>
         <EntityType Name="pergunta">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="id_evento" Type="int" Nullable="false" />
           <Property Name="pergunta" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
@@ -66,7 +66,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="usuario" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="id_pergunta" Type="int" Nullable="false" />
           <Property Name="resposta" Type="nvarchar(max)" />
@@ -84,7 +84,7 @@
           <Property Name="cadastro" Type="date" />
           <Property Name="CPF" Type="nchar" MaxLength="14" Nullable="false" />
           <Property Name="RG" Type="nchar" MaxLength="12" Nullable="false" />
-          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="r_phone" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="cel_phone" Type="nchar" MaxLength="10" />
           <Property Name="newsletter" Type="bit" Nullable="false" />
@@ -279,8 +279,8 @@
           <Property Name="palavra_chave2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="limite_participantes" Type="Int16" Nullable="false" />
           <Property Name="Local" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="data_hr_ini" Type="DateTime" Precision="3" />
-          <Property Name="data_hora_fim" Type="DateTime" Precision="3" />
+          <Property Name="data_hr_ini" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="data_hora_fim" Type="DateTime" Precision="0" Nullable="false" />
           <NavigationProperty Name="comentarios" Relationship="Self.FK_comentario__ToTable_1" FromRole="evento" ToRole="comentario" />
           <NavigationProperty Name="evento_composto" Relationship="Self.FK_evento_ToTable" FromRole="evento" ToRole="evento_composto" />
           <NavigationProperty Name="usuario" Relationship="Self.FK_evento_ToTable_1" FromRole="evento" ToRole="usuario" />
@@ -333,14 +333,12 @@
           </Key>
           <Property Name="login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pass" Type="String" MaxLength="8" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Endereco" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CEP" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Nascimento" Type="DateTime" Precision="0" />
           <Property Name="cadastro" Type="DateTime" Precision="0" />
           <Property Name="CPF" Type="String" MaxLength="14" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="RG" Type="String" MaxLength="12" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="r_phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="cel_phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="newsletter" Type="Boolean" Nullable="false" />
@@ -348,7 +346,8 @@
           <NavigationProperty Name="eventoes" Relationship="Self.FK_evento_ToTable_1" FromRole="usuario" ToRole="evento" />
           <NavigationProperty Name="participantes" Relationship="Self.FK_participante_ToTable" FromRole="usuario" ToRole="participante" />
           <NavigationProperty Name="respostas" Relationship="Self.FK_resposta_ToTable_1" FromRole="usuario" ToRole="resposta" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Nome" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="FK_comentario__ToTable_1">
           <End Role="evento" Type="Self.evento" Multiplicity="1" />
@@ -585,10 +584,10 @@
           <EntitySetMapping Name="usuarios">
             <EntityTypeMapping TypeName="EventosModel.usuario">
               <MappingFragment StoreEntitySet="usuario">
-                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="pass" ColumnName="pass" />
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="Endereco" ColumnName="Endereco" />
                 <ScalarProperty Name="CEP" ColumnName="CEP" />
                 <ScalarProperty Name="Nascimento" ColumnName="Nascimento" />

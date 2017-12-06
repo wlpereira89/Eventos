@@ -25,18 +25,17 @@ namespace Modelo.DAO
     
         public string login { get; set; }
         public string pass { get; set; }
-        public string Nome { get; set; }
         public string Endereco { get; set; }
         public string CEP { get; set; }
         public Nullable<System.DateTime> Nascimento { get; set; }
         public Nullable<System.DateTime> cadastro { get; set; }
         public string CPF { get; set; }
         public string RG { get; set; }
-        public string Email { get; set; }
         public string r_phone { get; set; }
         public string cel_phone { get; set; }
         public bool newsletter { get; set; }
-        public string email { get; set; }
+        public string Email { get; set; }
+        public string Nome { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<comentario> comentarios { get; set; }
