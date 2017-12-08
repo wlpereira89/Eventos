@@ -15,7 +15,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="login" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="id_evento" Type="int" Nullable="false" />
           <Property Name="comentario" Type="nvarchar(max)" Nullable="false" />
@@ -25,7 +25,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Categoria" Type="smallint" Nullable="false" />
           <Property Name="id_principal" Type="int" />
           <Property Name="Nome" Type="nchar" MaxLength="50" Nullable="false" />
@@ -35,14 +35,14 @@
           <Property Name="palavra_chave2" Type="nvarchar" MaxLength="50" />
           <Property Name="limite_participantes" Type="smallint" Nullable="false" />
           <Property Name="Local" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="data_hr_ini" Type="smalldatetime" Nullable="false" />
-          <Property Name="data_hora_fim" Type="smalldatetime" Nullable="false" />
+          <Property Name="data_hr_ini" Type="datetime" />
+          <Property Name="data_hora_fim" Type="datetime" />
         </EntityType>
         <EntityType Name="evento_composto">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nome" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="participante">
@@ -58,7 +58,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_evento" Type="int" Nullable="false" />
           <Property Name="pergunta" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
@@ -66,7 +66,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="usuario" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="id_pergunta" Type="int" Nullable="false" />
           <Property Name="resposta" Type="nvarchar(max)" />
@@ -279,8 +279,8 @@
           <Property Name="palavra_chave2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="limite_participantes" Type="Int16" Nullable="false" />
           <Property Name="Local" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="data_hr_ini" Type="DateTime" Precision="0" Nullable="false" />
-          <Property Name="data_hora_fim" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="data_hr_ini" Type="DateTime" Precision="3" />
+          <Property Name="data_hora_fim" Type="DateTime" Precision="3" />
           <NavigationProperty Name="comentarios" Relationship="Self.FK_comentario__ToTable_1" FromRole="evento" ToRole="comentario" />
           <NavigationProperty Name="evento_composto" Relationship="Self.FK_evento_ToTable" FromRole="evento" ToRole="evento_composto" />
           <NavigationProperty Name="usuario" Relationship="Self.FK_evento_ToTable_1" FromRole="evento" ToRole="usuario" />
@@ -346,8 +346,8 @@
           <NavigationProperty Name="eventoes" Relationship="Self.FK_evento_ToTable_1" FromRole="usuario" ToRole="evento" />
           <NavigationProperty Name="participantes" Relationship="Self.FK_participante_ToTable" FromRole="usuario" ToRole="participante" />
           <NavigationProperty Name="respostas" Relationship="Self.FK_resposta_ToTable_1" FromRole="usuario" ToRole="resposta" />
-          <Property Name="Email" Type="String" Nullable="false" />
-          <Property Name="Nome" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
         </EntityType>
         <Association Name="FK_comentario__ToTable_1">
           <End Role="evento" Type="Self.evento" Multiplicity="1" />
@@ -398,7 +398,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_participante_ToTable_1">
-          <End Role="evento" Type="Self.evento" Multiplicity="1" />
+          <End Role="evento" Type="Self.evento" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="participante" Type="Self.participante" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="evento">

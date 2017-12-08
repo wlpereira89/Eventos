@@ -39,8 +39,8 @@ namespace Web.Controllers
         // GET: participantes/Create
         public ActionResult Create()
         {
-            ViewBag.id_evento = new SelectList(db.eventoes, "Id", "Nome");
-            ViewBag.login = new SelectList(db.usuarios, "login", "pass");
+            ViewBag.id_evento = new SelectList(db.eventoes, "Id", "Id");
+            ViewBag.login = new SelectList(db.usuarios, "login", "login");
             return View();
         }
 
@@ -58,8 +58,8 @@ namespace Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_evento = new SelectList(db.eventoes, "Id", "Nome", participante.id_evento);
-            ViewBag.login = new SelectList(db.usuarios, "login", "pass", participante.login);
+            ViewBag.id_evento = new SelectList(db.eventoes, "Id", "Id", participante.id_evento);
+            ViewBag.login = new SelectList(db.usuarios, "login", "login", participante.login);
             return View(participante);
         }
 

@@ -1,1 +1,1 @@
-﻿Select * From comentario
+﻿SELECT * FROM dbo.evento
