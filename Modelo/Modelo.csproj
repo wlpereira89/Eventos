@@ -91,6 +91,7 @@
     <Compile Include="PN\pnEmail.cs" />
     <Compile Include="PN\pnEventos.cs" />
     <Compile Include="PN\pnEventosCompostos.cs" />
+    <Compile Include="PN\pnParticipantes.cs" />
     <Compile Include="PN\pnUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VM\vmEmail.cs" />

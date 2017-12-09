@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Modelo.DAO;
+using Modelo.PN;
 
 namespace Web.Controllers
 {
@@ -17,8 +18,18 @@ namespace Web.Controllers
         // GET: participantes
         public ActionResult Index()
         {
-            var participantes = db.participantes.Include(p => p.evento).Include(p => p.usuario);
-            return View(participantes.ToList());
+            
+            return View(pnParticipantes.Listar());
+        }
+        public ActionResult Lpresenca()
+        {
+            return View(pnParticipantes.Listar());
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Lpresenca([Bind(Include = "login,id_evento,Presenca")] participante participante)
+        {
+            return View(pnParticipantes.Listar());
         }
 
         // GET: participantes/Details/5
@@ -28,7 +39,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            participante participante = db.participantes.Find(id);
+            participante participante = pnParticipantes.ProcurarParticipante(id);
             if (participante == null)
             {
                 return HttpNotFound();
@@ -70,7 +81,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            participante participante = db.participantes.Find(id);
+            participante participante = pnParticipantes.ProcurarParticipante(id);
             if (participante == null)
             {
                 return HttpNotFound();
@@ -105,7 +116,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            participante participante = db.participantes.Find(id);
+            participante participante = pnParticipantes.ProcurarParticipante(id);
             if (participante == null)
             {
                 return HttpNotFound();
@@ -118,9 +129,8 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            participante participante = db.participantes.Find(id);
-            db.participantes.Remove(participante);
-            db.SaveChanges();
+            participante participante = pnParticipantes.ProcurarParticipante(id);
+            pnParticipantes.Excluir(id);
             return RedirectToAction("Index");
         }
 

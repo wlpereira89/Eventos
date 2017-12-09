@@ -320,6 +320,7 @@
     <Content Include="Views\eventoes\Lista.cshtml" />
     <Content Include="Views\evento_composto\Lista.cshtml" />
     <Content Include="Views\Home\Mailing.cshtml" />
+    <Content Include="Views\participantes\LPresenca.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
