@@ -12,10 +12,10 @@ namespace Web.Controllers
     
     public class HomeController : Controller
     {
-        EventosEntities db = new EventosEntities();
+        //EventosEntities db = new EventosEntities();
         public ActionResult Index()
         {
-            if (pnEventos.Logado)
+            if (pnUsuarios.Logado)
             {
                 return RedirectToAction("Menu");
             }
@@ -24,12 +24,12 @@ namespace Web.Controllers
         }
         public ActionResult Lista ()
         {
-            return View(pnEventos.Listar());
+            return View(pnUsuarios.Listar());
         }
 
         public ActionResult Menu()
         {            
-            if (pnEventos.Logado)
+            if (pnUsuarios.Logado)
             {
                 return View();
             }
@@ -62,7 +62,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            usuario usuario = pnEventos.ProcurarUsuario(id);
+            usuario usuario = pnUsuarios.ProcurarUsuario(id);
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -172,7 +172,7 @@ namespace Web.Controllers
                     {
                         Session["usuarioLogadoID"] = v.login.ToString();
                         Session["nomeUsuarioLogado"] = v.Nome.ToString();
-                        pnEventos.Logado = true;
+                        pnUsuarios.Logado = true;
 
                         return RedirectToAction("Index");
                     }
@@ -183,7 +183,7 @@ namespace Web.Controllers
         public ActionResult LogOff()
         {
             Session.Clear();
-            pnEventos.Logado = false;
+            pnUsuarios.Logado = false;
             return RedirectToAction("Index");
         }
     }

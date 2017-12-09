@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 @using Modelo.PN;
-@if (pnEventos.Logado)
+@if (pnUsuarios.Logado)
 {
     using (Html.BeginForm("LogOff", "Home", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
