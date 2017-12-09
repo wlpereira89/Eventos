@@ -319,6 +319,7 @@
     <Content Include="Views\eventoes\WebPage1.cshtml" />
     <Content Include="Views\eventoes\Lista.cshtml" />
     <Content Include="Views\evento_composto\Lista.cshtml" />
+    <Content Include="Views\Home\Mailing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

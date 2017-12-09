@@ -40,6 +40,20 @@ namespace Modelo.PN
             }
 
         }
+        public static List<usuario> ListarNews()
+        {
+            try
+            {
+                EventosEntities db = new EventosEntities();
+                
+                return db.usuarios.SqlQuery("SELECT * FROM dbo.usuario WHERE newsletter=1;").ToList(); 
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
         public static usuario ProcurarUsuario(string id)
         {
             try
@@ -134,6 +148,7 @@ namespace Modelo.PN
                 throw;
             }
         }
+
 
         /*public static bool Registrar(usuario u)
         {

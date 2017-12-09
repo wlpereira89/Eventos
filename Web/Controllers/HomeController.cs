@@ -7,28 +7,31 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Modelo.VM;
+using System.Net.Mail;
+using System.Threading.Tasks;
 namespace Web.Controllers
 {
-    
+
     public class HomeController : Controller
     {
-        
+
         public ActionResult Index()
         {
             if (pnUsuarios.Logado)
             {
                 return RedirectToAction("Menu");
             }
-                
+
             return View();
         }
-        public ActionResult Lista ()
+        public ActionResult Lista()
         {
             return View(pnUsuarios.Listar());
         }
 
         public ActionResult Menu()
-        {            
+        {
             if (pnUsuarios.Logado)
             {
                 return View();
@@ -54,7 +57,12 @@ namespace Web.Controllers
 
             return View();
         }
+        public ActionResult Mailing()
+        {
+            ViewBag.Message = "Enviar Mailling.";
 
+            return View();
+        }
         // GET: UsuariosC/Details/5
         public ActionResult Details(string id)
         {
@@ -85,8 +93,8 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-            pnUsuarios.CadastrarUsuario(usuario);
-            return RedirectToAction("Index");
+                pnUsuarios.CadastrarUsuario(usuario);
+                return RedirectToAction("Index");
             }
 
             return View(usuario);
@@ -142,7 +150,7 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            pnUsuarios.Excluir(id);            
+            pnUsuarios.Excluir(id);
             return RedirectToAction("Lista");
         }
 
@@ -158,7 +166,7 @@ namespace Web.Controllers
             // esta action trata o post (login)
             if (ModelState.IsValid) //verifica se é válido
             {
-                
+
                 var v = pnUsuarios.VerificaUsuario(u);
                 if (v != null)
                 {
@@ -167,7 +175,7 @@ namespace Web.Controllers
                     pnUsuarios.Logado = true;
                     return RedirectToAction("Index");
                 }
-                
+
             }
             return View(u);
         }
@@ -176,6 +184,56 @@ namespace Web.Controllers
             Session.Clear();
             pnUsuarios.Logado = false;
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Contact(vmEmail model)
+        //public ActionResult Contact(vmFormularioEmail model)
+        {
+            if (ModelState.IsValid)
+            {
+                var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
+                var message = new MailMessage();
+                message.To.Add(new MailAddress("wagnerluis89@hotmail.com")); //Destinatário
+                message.From = new MailAddress("wagnerluis1989@gmail.com"); //Remetente
+                message.Subject = "Suporte do Site de Eventos";
+                message.Body = string.Format(body, model.FromName, model.FromEmail,
+                model.Mensage);
+                message.IsBodyHtml = true;
+                using (var smtp = new SmtpClient())
+                {
+                    var credential = new NetworkCredential
+                    {
+                        UserName = "wagnerluis1989@gmail.com", // Seu E-mail
+                        Password = "rq5i6mer" // Sua Senha
+                    };
+                    smtp.Credentials = credential;
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    await smtp.SendMailAsync(message);
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Mailing(vmEmail model)
+        //public ActionResult Contact(vmFormularioEmail model)
+        {
+            if (ModelState.IsValid)
+            {
+                List < usuario > usuarios= pnUsuarios.ListarNews();
+                foreach (var user in usuarios)
+                {
+                    await pnEmail.EnviarMailAsync(model, user.Email);
+                }
+                
+                return RedirectToAction("Index");
+                
+            }
+            return View(model);
         }
     }
 }
