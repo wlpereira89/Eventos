@@ -10,8 +10,8 @@
     [CPF] NCHAR(14) NOT NULL, 
 	[RG] NCHAR(12) NOT NULL,
     [Email] NVARCHAR(50) NOT NULL, 
-    [r_phone] NCHAR(10) NOT NULL, 
-    [cel_phone] NCHAR(10) NULL, 
+    [r_phone] NCHAR(15) NOT NULL, 
+    [cel_phone] NCHAR(15) NULL, 
     [newsletter] BIT NOT NULL, 
     CONSTRAINT [PK_usuario] PRIMARY KEY ([login]),
 )
