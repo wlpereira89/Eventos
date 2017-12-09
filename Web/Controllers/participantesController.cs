@@ -39,7 +39,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            participante participante = pnParticipantes.ProcurarParticipante(id);
+            participante participante = pnParticipantes.Procurar(id);
             if (participante == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace Web.Controllers
         // GET: participantes/Create
         public ActionResult Create()
         {
-            ViewBag.id_evento = new SelectList(db.eventoes, "Id", "Id");
+            ViewBag.id_evento = 
             ViewBag.login = new SelectList(db.usuarios, "login", "login");
             return View();
         }
@@ -81,7 +81,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            participante participante = pnParticipantes.ProcurarParticipante(id);
+            participante participante = pnParticipantes.Procurar(id);
             if (participante == null)
             {
                 return HttpNotFound();
@@ -104,8 +104,8 @@ namespace Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.id_evento = new SelectList(db.eventoes, "Id", "Nome", participante.id_evento);
-            ViewBag.login = new SelectList(db.usuarios, "login", "pass", participante.login);
+            ViewBag.id_evento = new SelectList(pnEventos.PegarDB(), "Id", "Nome", participante.id_evento);
+            ViewBag.login = new SelectList(pnUsuarios.PegarDB(), "login", "pass", participante.login);
             return View(participante);
         }
 
@@ -116,7 +116,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            participante participante = pnParticipantes.ProcurarParticipante(id);
+            participante participante = pnParticipantes.Procurar(id);
             if (participante == null)
             {
                 return HttpNotFound();
@@ -129,7 +129,7 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            participante participante = pnParticipantes.ProcurarParticipante(id);
+            participante participante = pnParticipantes.Procurar(id);
             pnParticipantes.Excluir(id);
             return RedirectToAction("Index");
         }

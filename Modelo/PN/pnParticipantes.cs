@@ -24,7 +24,7 @@ namespace Modelo.PN
             }
             
         }
-        public static participante ProcurarParticipante(string id)
+        public static participante Procurar(string id)
         {
             try
             {
@@ -43,6 +43,23 @@ namespace Modelo.PN
             {
                 throw;
             }
+        }
+
+        public static void Cadastrar(usuario u)
+        {
+            try
+            {
+                u.cadastro = DateTime.Now;
+                EventosEntities db = new EventosEntities();
+                db.usuarios.Add(u);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
         }
 
         public static void Excluir(string id)

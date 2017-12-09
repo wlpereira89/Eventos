@@ -70,7 +70,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            usuario usuario = pnUsuarios.ProcurarUsuario(id);
+            usuario usuario = pnUsuarios.Procurar(id);
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -93,7 +93,7 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                pnUsuarios.CadastrarUsuario(usuario);
+                pnUsuarios.Cadastrar(usuario);
                 return RedirectToAction("Index");
             }
 
@@ -107,7 +107,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            usuario usuario = pnUsuarios.ProcurarUsuario(id);
+            usuario usuario = pnUsuarios.Procurar(id);
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -137,7 +137,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            usuario usuario = pnUsuarios.ProcurarUsuario(id);
+            usuario usuario = pnUsuarios.Procurar(id);
             if (usuario == null)
             {
                 return HttpNotFound();

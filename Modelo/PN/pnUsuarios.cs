@@ -24,9 +24,22 @@ namespace Modelo.PN
             }
 
         }*/
-         
-         
+
+
         public static bool Logado { get; set; } = false;
+        public static DbSet<usuario> PegarDB()
+        {
+            try
+            {
+                EventosEntities db = new EventosEntities();
+                return db.usuarios;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
+        }
         public static List<usuario> Listar()
         {
             try
@@ -45,8 +58,8 @@ namespace Modelo.PN
             try
             {
                 EventosEntities db = new EventosEntities();
-                
-                return db.usuarios.SqlQuery("SELECT * FROM dbo.usuario WHERE newsletter=1;").ToList(); 
+
+                return db.usuarios.SqlQuery("SELECT * FROM dbo.usuario WHERE newsletter=1;").ToList();
             }
             catch (Exception)
             {
@@ -54,17 +67,17 @@ namespace Modelo.PN
             }
 
         }
-        public static usuario ProcurarUsuario(string id)
+        public static usuario Procurar(string id)
         {
             try
             {
                 EventosEntities db = new EventosEntities();
-                usuario usuario = db.usuarios.Find(id);
-                if (usuario == null)
+                usuario u = db.usuarios.Find(id);
+                if (u == null)
                 {
                     return null;
                 }
-                return usuario;
+                return u;
             }
             catch (Exception)
             {
@@ -72,7 +85,7 @@ namespace Modelo.PN
             }
 
         }
-        public static void CadastrarUsuario(usuario u)
+        public static void Cadastrar(usuario u)
         {
             try
             {
@@ -95,20 +108,20 @@ namespace Modelo.PN
                 EventosEntities db = new EventosEntities();
                 db.Entry(u).State = EntityState.Modified;
                 db.SaveChanges();
-                    
+
             }
             catch (Exception)
             {
                 throw;
             }
-            
+
         }
         public static void Excluir(string id)
         {
             try
             {
                 EventosEntities db = new EventosEntities();
-                
+
                 db.usuarios.Remove(db.usuarios.Find(id));
                 db.SaveChanges();
 
@@ -119,7 +132,7 @@ namespace Modelo.PN
             }
 
         }
-        public static void Dispose (bool disposing)
+        public static void Dispose(bool disposing)
         {
             try
             {
@@ -127,7 +140,7 @@ namespace Modelo.PN
                 if (disposing)
                 {
                     db.Dispose();
-                }               
+                }
 
             }
             catch (Exception)
@@ -197,4 +210,4 @@ namespace Modelo.PN
             }
         }*/
     }
-    }
+}
