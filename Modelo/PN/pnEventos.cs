@@ -7,22 +7,42 @@ using System.Threading.Tasks;
 
 namespace Modelo.PN
 {
+
     public class pnEventos
-    {
+    {       
+        
         public static bool Logado { get; set; } = false;
         public static List<usuario> Listar()
         {
             try
             {
-            EventosEntities db = new EventosEntities();
-            return (db.usuarios.ToList());
+                EventosEntities db = new EventosEntities();
+                return db.usuarios.ToList();
             }
             catch (Exception)
             {
                 throw;
             }
+            
         }
-
+        public static usuario ProcurarUsuario (string id)
+        {
+            try
+            {
+                EventosEntities db = new EventosEntities();                
+                usuario usuario = db.usuarios.Find(id);
+                if (usuario == null)
+                {
+                    return null;
+                }
+                return usuario;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
+        }
 
         /*public static bool Registrar(usuario u)
         {
@@ -72,4 +92,6 @@ namespace Modelo.PN
         }*/
         
     }
+
+    
 }

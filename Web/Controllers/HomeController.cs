@@ -1,4 +1,5 @@
-﻿using Modelo.DAO;
+﻿using Modelo.PN;
+using Modelo.DAO;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -6,14 +7,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Modelo.PN;
 namespace Web.Controllers
 {
     
     public class HomeController : Controller
     {
-        
-        private EventosEntities db = new EventosEntities();
+        EventosEntities db = new EventosEntities();
         public ActionResult Index()
         {
             if (pnEventos.Logado)
@@ -25,7 +24,7 @@ namespace Web.Controllers
         }
         public ActionResult Lista ()
         {
-            return View(db.usuarios.ToList());
+            return View(pnEventos.Listar());
         }
 
         public ActionResult Menu()
@@ -63,7 +62,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            usuario usuario = db.usuarios.Find(id);
+            usuario usuario = pnEventos.ProcurarUsuario(id);
             if (usuario == null)
             {
                 return HttpNotFound();
