@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +11,21 @@ namespace Modelo.PN
 {
     public class pnUsuarios
     {
+        /* public static usuario ProcurarUsuario(string id)
+        {
+            try
+            {
+                EventosEntities db = new EventosEntities();
+                
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }*/
+         
+         
         public static bool Logado { get; set; } = false;
         public static List<usuario> Listar()
         {
@@ -40,6 +57,82 @@ namespace Modelo.PN
                 throw;
             }
 
+        }
+        public static void CadastrarUsuario(usuario u)
+        {
+            try
+            {
+                u.cadastro = DateTime.Now;
+                EventosEntities db = new EventosEntities();
+                db.usuarios.Add(u);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
+        }
+        public static void Editar(usuario u)
+        {
+            try
+            {
+                EventosEntities db = new EventosEntities();
+                db.Entry(u).State = EntityState.Modified;
+                db.SaveChanges();
+                    
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
+        }
+        public static void Excluir(string id)
+        {
+            try
+            {
+                EventosEntities db = new EventosEntities();
+                
+                db.usuarios.Remove(db.usuarios.Find(id));
+                db.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        public static void Dispose (bool disposing)
+        {
+            try
+            {
+                EventosEntities db = new EventosEntities();
+                if (disposing)
+                {
+                    db.Dispose();
+                }               
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public static usuario VerificaUsuario(usuario u)
+        {
+            try
+            {
+                EventosEntities db = new EventosEntities();
+                return db.usuarios.Where(a => a.login.Equals(u.login) && a.pass.Equals(u.pass)).FirstOrDefault();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /*public static bool Registrar(usuario u)
@@ -89,4 +182,4 @@ namespace Modelo.PN
             }
         }*/
     }
-}
+    }

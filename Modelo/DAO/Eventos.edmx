@@ -85,8 +85,8 @@
           <Property Name="CPF" Type="nchar" MaxLength="14" Nullable="false" />
           <Property Name="RG" Type="nchar" MaxLength="12" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="r_phone" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="cel_phone" Type="nchar" MaxLength="10" />
+          <Property Name="r_phone" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="cel_phone" Type="nchar" MaxLength="15" />
           <Property Name="newsletter" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_comentario _ToTable_1">
@@ -339,8 +339,8 @@
           <Property Name="cadastro" Type="DateTime" Precision="0" />
           <Property Name="CPF" Type="String" MaxLength="14" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="RG" Type="String" MaxLength="12" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="r_phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="cel_phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="r_phone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="cel_phone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
           <Property Name="newsletter" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="comentarios" Relationship="Self.FK_comentario_ToTable" FromRole="usuario" ToRole="comentario" />
           <NavigationProperty Name="eventoes" Relationship="Self.FK_evento_ToTable_1" FromRole="usuario" ToRole="evento" />

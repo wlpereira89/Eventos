@@ -12,7 +12,7 @@ namespace Web.Controllers
     
     public class HomeController : Controller
     {
-        //EventosEntities db = new EventosEntities();
+        
         public ActionResult Index()
         {
             if (pnUsuarios.Logado)
@@ -81,16 +81,15 @@ namespace Web.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "login,pass,Nome,Endereco,CEP,Nascimento,cadastro,CPF,RG,email,r_phone,cel_phone,newsletter")] usuario usuario)
+        public ActionResult Create([Bind(Include = "login,pass,Nome,Endereco,CEP,Nascimento,CPF,RG,email,r_phone,cel_phone,newsletter")] usuario usuario)
         {
-           // if (ModelState.IsValid)
-           // {
-            db.usuarios.Add(usuario);
-            db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+            pnUsuarios.CadastrarUsuario(usuario);
             return RedirectToAction("Index");
-           // }
+            }
 
-            //return View(usuario);
+            return View(usuario);
         }
 
         // GET: UsuariosC/Edit/5
@@ -100,7 +99,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            usuario usuario = db.usuarios.Find(id);
+            usuario usuario = pnUsuarios.ProcurarUsuario(id);
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -117,8 +116,7 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(usuario).State = EntityState.Modified;
-                db.SaveChanges();
+                pnUsuarios.Editar(usuario);
                 return RedirectToAction("Index");
             }
             return View(usuario);
@@ -131,7 +129,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            usuario usuario = db.usuarios.Find(id);
+            usuario usuario = pnUsuarios.ProcurarUsuario(id);
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -144,18 +142,13 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            usuario usuario = db.usuarios.Find(id);
-            db.usuarios.Remove(usuario);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            pnUsuarios.Excluir(id);            
+            return RedirectToAction("Lista");
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            pnUsuarios.Dispose(disposing);
             base.Dispose(disposing);
         }
         [HttpPost]
@@ -165,18 +158,16 @@ namespace Web.Controllers
             // esta action trata o post (login)
             if (ModelState.IsValid) //verifica se é válido
             {
-                using (EventosEntities dc = new EventosEntities())
+                
+                var v = pnUsuarios.VerificaUsuario(u);
+                if (v != null)
                 {
-                    var v = dc.usuarios.Where(a => a.login.Equals(u.login) && a.pass.Equals(u.pass)).FirstOrDefault();
-                    if (v != null)
-                    {
-                        Session["usuarioLogadoID"] = v.login.ToString();
-                        Session["nomeUsuarioLogado"] = v.Nome.ToString();
-                        pnUsuarios.Logado = true;
-
-                        return RedirectToAction("Index");
-                    }
+                    Session["usuarioLogadoID"] = v.login.ToString();
+                    Session["nomeUsuarioLogado"] = v.Nome.ToString();
+                    pnUsuarios.Logado = true;
+                    return RedirectToAction("Index");
                 }
+                
             }
             return View(u);
         }
