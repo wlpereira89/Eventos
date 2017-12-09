@@ -17,7 +17,7 @@ namespace Modelo.PN
             var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
             var message = new MailMessage();
             message.To.Add(new MailAddress(para)); //Destinatário
-            message.From = new MailAddress("wagnerluis1989@gmail.com"); //Remetente
+            message.From = new MailAddress("stdutfpr@gmail.com"); //Remetente
             message.Subject = "Suporte do Site de Eventos";
             message.Body = string.Format(body, model.FromName, model.FromEmail,
             model.Mensage);
@@ -26,8 +26,8 @@ namespace Modelo.PN
             {
                 var credential = new NetworkCredential
                 {
-                    UserName = "wagnerluis1989@gmail.com", // Seu E-mail
-                    Password = "rq5i6mer" // Sua Senha
+                    UserName = "stdutfpr@gmail.com", // Seu E-mail
+                    Password = "123456LL" // Sua Senha
                 };
                 smtp.Credentials = credential;
                 smtp.Host = "smtp.gmail.com";

@@ -204,8 +204,8 @@ namespace Web.Controllers
                 {
                     var credential = new NetworkCredential
                     {
-                        UserName = "wagnerluis1989@gmail.com", // Seu E-mail
-                        Password = "rq5i6mer" // Sua Senha
+                        UserName = "stdutfpr@gmail.com", // Seu E-mail
+                        Password = "123456LL" // Sua Senha
                     };
                     smtp.Credentials = credential;
                     smtp.Host = "smtp.gmail.com";
