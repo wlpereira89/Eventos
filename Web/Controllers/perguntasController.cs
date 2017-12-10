@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Modelo.DAO;
+using Modelo.PN;
 
 namespace Web.Controllers
 {
@@ -17,8 +18,8 @@ namespace Web.Controllers
         // GET: perguntas
         public ActionResult Index()
         {
-            var perguntas = db.pergunta.Include(p => p.evento);
-            return View(perguntas.ToList());
+
+            return View(pnPerguntas.Listar());
         }
 
         // GET: perguntas/Details/5
@@ -28,7 +29,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            pergunta pergunta = db.pergunta.Find(id);
+            pergunta pergunta = pnPerguntas.Procurar(id);
             if (pergunta == null)
             {
                 return HttpNotFound();
@@ -39,7 +40,7 @@ namespace Web.Controllers
         // GET: perguntas/Create
         public ActionResult Create()
         {
-            ViewBag.id_evento = new SelectList(db.evento, "Id", "Nome");
+            ViewBag.id_evento = new SelectList(pnEventos.PegarDB(), "Id", "Nome");
             return View();
         }
 
@@ -52,12 +53,11 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.pergunta.Add(pergunta);
-                db.SaveChanges();
+                pnPerguntas.Cadastrar(pergunta);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_evento = new SelectList(db.evento, "Id", "Nome", pergunta.id_evento);
+            ViewBag.id_evento = new SelectList(pnEventos.PegarDB(), "Id", "Nome", pergunta.id_evento);
             return View(pergunta);
         }
 
@@ -68,7 +68,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            pergunta pergunta = db.pergunta.Find(id);
+            pergunta pergunta = pnPerguntas.Procurar(id);
             if (pergunta == null)
             {
                 return HttpNotFound();
@@ -82,12 +82,11 @@ namespace Web.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_evento,pergunta1")] pergunta pergunta)
+        public ActionResult Edit([Bind(Include = "Id, id_evento,pergunta1")] pergunta pergunta)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(pergunta).State = EntityState.Modified;
-                db.SaveChanges();
+                pnPerguntas.Editar(pergunta);
                 return RedirectToAction("Index");
             }
             ViewBag.id_evento = new SelectList(db.evento, "Id", "Nome", pergunta.id_evento);
@@ -101,7 +100,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            pergunta pergunta = db.pergunta.Find(id);
+            pergunta pergunta = pnPerguntas.Procurar(id);
             if (pergunta == null)
             {
                 return HttpNotFound();
@@ -114,9 +113,7 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            pergunta pergunta = db.pergunta.Find(id);
-            db.pergunta.Remove(pergunta);
-            db.SaveChanges();
+            pnPerguntas.Excluir(id);
             return RedirectToAction("Index");
         }
 
@@ -124,7 +121,7 @@ namespace Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                pnPerguntas.Dispose(disposing);
             }
             base.Dispose(disposing);
         }

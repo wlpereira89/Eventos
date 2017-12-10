@@ -13,7 +13,7 @@ namespace Web.Controllers
 {
     public class evento_compostoController : Controller
     {
-        private EventosEntities db = new EventosEntities();
+        //private EventosEntities db = new EventosEntities();
 
 
         public ActionResult Lista()
@@ -120,10 +120,7 @@ namespace Web.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            pnEventosCompostos.Dispose(disposing);
             base.Dispose(disposing);
         }
     }

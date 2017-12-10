@@ -6,16 +6,19 @@ using System.Data.Entity;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+
 namespace Modelo.PN
 {
-    public class pnEventosCompostos
+    public class pnPerguntas
     {
-        public static List<evento_composto> Listar()
+
+        public static List<pergunta> Listar()
         {
             try
             {
                 EventosEntities db = new EventosEntities();
-                return db.evento_composto.ToList();
+
+                return db.pergunta.Include(p => p.evento).ToList();
             }
             catch (Exception)
             {
@@ -23,12 +26,12 @@ namespace Modelo.PN
             }
 
         }
-        public static evento_composto Procurar(int? id)
+        public static pergunta Procurar(int? id)
         {
             try
             {
                 EventosEntities db = new EventosEntities();
-                evento_composto u = db.evento_composto.Find(id);
+                pergunta u = db.pergunta.Find(id);
                 if (u == null)
                 {
                     return null;
@@ -41,14 +44,14 @@ namespace Modelo.PN
             }
 
         }
-       
-        
-        public static void Cadastrar(evento_composto ec)
+
+
+        public static void Cadastrar(pergunta ec)
         {
             try
             {
                 EventosEntities db = new EventosEntities();
-                db.evento_composto.Add(ec);
+                db.pergunta.Add(ec);
                 db.SaveChanges();
             }
             catch (Exception)
@@ -58,7 +61,7 @@ namespace Modelo.PN
 
 
         }
-        public static void Editar(evento_composto ec)
+        public static void Editar(pergunta ec)
         {
             try
             {
@@ -78,7 +81,7 @@ namespace Modelo.PN
             try
             {
                 EventosEntities db = new EventosEntities();
-                db.evento_composto.Remove(db.evento_composto.Find(id));
+                db.pergunta.Remove(db.pergunta.Find(id));
                 db.SaveChanges();
 
             }
@@ -88,12 +91,12 @@ namespace Modelo.PN
             }
 
         }
-        public static DbSet<evento_composto> PegarDB()
+        public static DbSet<pergunta> PegarDB()
         {
             try
             {
                 EventosEntities db = new EventosEntities();
-                return db.evento_composto;
+                return db.pergunta;
             }
             catch (Exception)
             {
@@ -117,5 +120,6 @@ namespace Modelo.PN
                 throw;
             }
         }
+
     }
 }
