@@ -230,8 +230,7 @@ namespace Web.Controllers
                     await pnEmail.EnviarMailAsync(model, user.Email);
                 }
 
-                return RedirectToAction("Index");
-                
+                return RedirectToAction("Index");                
             }
             return View(model);
         }

@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Modelo.PN;
 using Modelo.DAO;
+using System.Threading.Tasks;
+using Modelo.VM;
 
 namespace Web.Controllers
 {
@@ -84,10 +86,17 @@ namespace Web.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Categoria,id_principal,Nome,Responsavel,palavra_chave,palavra_chave2,limite_participantes,Local,Data")] evento evento)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Categoria,id_principal,Nome,Responsavel,palavra_chave,palavra_chave2,limite_participantes,Local,Data")] evento evento)
         {
             if (ModelState.IsValid)
             {
+                string message = "O evento "+evento.Nome+"foi motificado verifique as alterações em nossa pagina";
+                List<usuario> usuarios = pnParticipantes.ListarPorEvento(evento);
+                foreach (var user in usuarios)
+                {
+                    
+                    await pnEmail.EnviarMailAsync(message, user.Email);
+                }
                 pnEventos.Editar(evento);
                 return RedirectToAction("Index");
             }
@@ -110,11 +119,19 @@ namespace Web.Controllers
             }
             return View(evento);
         }
-        public ActionResult Cancelar(int? id)
+        public async Task<ActionResult> Cancelar(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            evento evento = pnEventos.Procurar(id);
+            string message = "O evento " + evento.Nome + "foi cancelado, duvidas entrar em contato com a instituição";
+            List<usuario> usuarios = pnParticipantes.ListarPorEvento(evento);
+            foreach (var user in usuarios)
+            {
+
+                await pnEmail.EnviarMailAsync(message, user.Email);
             }
             pnEventos.Cancelar(id);
             return RedirectToAction("Index");
@@ -142,7 +159,9 @@ namespace Web.Controllers
         {
             return View();
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        
         protected override void Dispose(bool disposing)
         {
             pnEventos.Dispose(disposing);

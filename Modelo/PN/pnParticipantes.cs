@@ -24,6 +24,18 @@ namespace Modelo.PN
             }
             
         }
+        public static List<usuario> ListarPorEvento(evento e)
+        {
+            try
+            {
+                EventosEntities db = new EventosEntities();
+                return db.usuario.SqlQuery("SELECT * FROM dbo.usuario JOIN dbo.participante ON participante.login = usuario.login WHERE id_evento =" + e.Id + ";").ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public static participante Procurar(string id)
         {
             try
@@ -31,7 +43,7 @@ namespace Modelo.PN
                 var ids = id.Split('-');
                 EventosEntities db = new EventosEntities();
 
-                var participantes = db.participante.SqlQuery("SELECT * FROM dbo.participante WHERE id_evento="+ids[0]+" AND login="+ids[1]+";").ToList();
+                var participantes = db.participante.SqlQuery("SELECT * FROM dbo.participante WHERE id_evento="+ids[0]+" AND login='"+ids[1]+"';").ToList();
 
                 if (participantes[0] == null)
                 {
@@ -49,7 +61,6 @@ namespace Modelo.PN
         {
             try
             {
-                u.cadastro = DateTime.Now;
                 EventosEntities db = new EventosEntities();
                 db.usuario.Add(u);
                 db.SaveChanges();
@@ -81,5 +92,6 @@ namespace Modelo.PN
             }
 
         }
+
     }
 }

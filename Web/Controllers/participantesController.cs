@@ -17,20 +17,9 @@ namespace Web.Controllers
 
         // GET: participantes
         public ActionResult Index()
-        {
-            
+        {            
             return View(pnParticipantes.Listar());
-        }
-        public ActionResult Lpresenca()
-        {
-            return View(pnParticipantes.Listar());
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Lpresenca([Bind(Include = "login,id_evento,Presenca")] participante participante)
-        {
-            return View(pnParticipantes.Listar());
-        }
+        }        
 
         // GET: participantes/Details/5
         public ActionResult Details(string id)
@@ -50,8 +39,8 @@ namespace Web.Controllers
         // GET: participantes/Create
         public ActionResult Create()
         {
-            ViewBag.id_evento = 
-            ViewBag.login = new SelectList(db.usuario, "login", "login");
+            ViewBag.id_evento = new SelectList(db.evento, "Id", "Nome");
+            ViewBag.login = new SelectList(db.usuario, "login", "Nome");
             return View();
         }
 
@@ -69,8 +58,8 @@ namespace Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_evento = new SelectList(db.evento, "Id", "Id", participante.id_evento);
-            ViewBag.login = new SelectList(db.usuario, "login", "login", participante.login);
+            ViewBag.id_evento = new SelectList(db.evento, "Id", "Nome", participante.id_evento);
+            ViewBag.login = new SelectList(db.usuario, "login", "Nome", participante.login);
             return View(participante);
         }
 
@@ -87,7 +76,7 @@ namespace Web.Controllers
                 return HttpNotFound();
             }
             ViewBag.id_evento = new SelectList(db.evento, "Id", "Nome", participante.id_evento);
-            ViewBag.login = new SelectList(db.usuario, "login", "pass", participante.login);
+            ViewBag.login = new SelectList(db.usuario, "login", "Nome", participante.login);
             return View(participante);
         }
 
@@ -105,7 +94,7 @@ namespace Web.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.id_evento = new SelectList(pnEventos.PegarDB(), "Id", "Nome", participante.id_evento);
-            ViewBag.login = new SelectList(pnUsuarios.PegarDB(), "login", "pass", participante.login);
+            ViewBag.login = new SelectList(pnUsuarios.PegarDB(), "login", "Nome", participante.login);
             return View(participante);
         }
 
