@@ -26,12 +26,12 @@ namespace Modelo.DAO
         }
     
         public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
-        public virtual DbSet<comentario> comentarios { get; set; }
-        public virtual DbSet<evento> eventoes { get; set; }
+        public virtual DbSet<comentario> comentario { get; set; }
+        public virtual DbSet<evento> evento { get; set; }
         public virtual DbSet<evento_composto> evento_composto { get; set; }
-        public virtual DbSet<participante> participantes { get; set; }
-        public virtual DbSet<pergunta> perguntas { get; set; }
-        public virtual DbSet<resposta> respostas { get; set; }
-        public virtual DbSet<usuario> usuarios { get; set; }
+        public virtual DbSet<participante> participante { get; set; }
+        public virtual DbSet<pergunta> pergunta { get; set; }
+        public virtual DbSet<resposta> resposta { get; set; }
+        public virtual DbSet<usuario> usuario { get; set; }
     }
 }

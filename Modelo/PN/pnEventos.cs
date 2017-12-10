@@ -16,7 +16,7 @@ namespace Modelo.PN
             try
             {
                 EventosEntities db = new EventosEntities();
-                return db.eventoes;
+                return db.evento;
             }
             catch (Exception)
             {
@@ -30,8 +30,8 @@ namespace Modelo.PN
             {
                 
                 EventosEntities db = new EventosEntities();
-                var eventoes = db.eventoes.Include(e => e.comentarios).Include(e => e.evento_composto).Include(e => e.usuario);
-                return db.eventoes.ToList();
+                var evento = db.evento.Include(e => e.comentario).Include(e => e.evento_composto).Include(e => e.usuario);
+                return db.evento.ToList();
             }
             catch (Exception)
             {
@@ -40,12 +40,12 @@ namespace Modelo.PN
 
         }
         
-        public static evento Procurar(string id)
+        public static evento Procurar(int? id)
         {
             try
             {
                 EventosEntities db = new EventosEntities();
-                evento e = db.eventoes.Find(id);
+                evento e = db.evento.Find(id);
                 if (e == null)
                 {
                     return null;
@@ -61,9 +61,11 @@ namespace Modelo.PN
         public static void Cadastrar(evento e)
         {
             try
-            {                
+            {
+                e.Cancelado = false;
+                e.emitidos = false;
                 EventosEntities db = new EventosEntities();
-                db.eventoes.Add(e);
+                db.evento.Add(e);
                 db.SaveChanges();
             }
             catch (Exception)
@@ -88,13 +90,50 @@ namespace Modelo.PN
             }
 
         }
-        public static void Excluir(string id)
+        public static void Cancelar(int? id)
+        {
+            try
+            {                
+                EventosEntities db = new EventosEntities();
+                evento e = db.evento.Find(id);
+                if (e.Data > DateTime.Now)
+                {
+                    e.Cancelado = true;
+                    db.Entry(e).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        public static void RemoverCancelamento(int? id)
+        {
+            try
+            {
+                EventosEntities db = new EventosEntities();
+                evento e = db.evento.Find(id);
+                e.Cancelado = false;
+                db.Entry(e).State = EntityState.Modified;
+                db.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        public static void Excluir(int id)
         {
             try
             {
                 EventosEntities db = new EventosEntities();
 
-                db.eventoes.Remove(db.eventoes.Find(id));
+                db.evento.Remove(db.evento.Find(id));
                 db.SaveChanges();
 
             }

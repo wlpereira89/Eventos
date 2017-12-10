@@ -51,7 +51,7 @@ namespace Web.Controllers
         public ActionResult Create()
         {
             ViewBag.id_evento = 
-            ViewBag.login = new SelectList(db.usuarios, "login", "login");
+            ViewBag.login = new SelectList(db.usuario, "login", "login");
             return View();
         }
 
@@ -64,13 +64,13 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.participantes.Add(participante);
+                db.participante.Add(participante);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_evento = new SelectList(db.eventoes, "Id", "Id", participante.id_evento);
-            ViewBag.login = new SelectList(db.usuarios, "login", "login", participante.login);
+            ViewBag.id_evento = new SelectList(db.evento, "Id", "Id", participante.id_evento);
+            ViewBag.login = new SelectList(db.usuario, "login", "login", participante.login);
             return View(participante);
         }
 
@@ -86,8 +86,8 @@ namespace Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.id_evento = new SelectList(db.eventoes, "Id", "Nome", participante.id_evento);
-            ViewBag.login = new SelectList(db.usuarios, "login", "pass", participante.login);
+            ViewBag.id_evento = new SelectList(db.evento, "Id", "Nome", participante.id_evento);
+            ViewBag.login = new SelectList(db.usuario, "login", "pass", participante.login);
             return View(participante);
         }
 

@@ -17,7 +17,7 @@ namespace Web.Controllers
         // GET: perguntas
         public ActionResult Index()
         {
-            var perguntas = db.perguntas.Include(p => p.evento);
+            var perguntas = db.pergunta.Include(p => p.evento);
             return View(perguntas.ToList());
         }
 
@@ -28,7 +28,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            pergunta pergunta = db.perguntas.Find(id);
+            pergunta pergunta = db.pergunta.Find(id);
             if (pergunta == null)
             {
                 return HttpNotFound();
@@ -39,7 +39,7 @@ namespace Web.Controllers
         // GET: perguntas/Create
         public ActionResult Create()
         {
-            ViewBag.id_evento = new SelectList(db.eventoes, "Id", "Nome");
+            ViewBag.id_evento = new SelectList(db.evento, "Id", "Nome");
             return View();
         }
 
@@ -52,12 +52,12 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.perguntas.Add(pergunta);
+                db.pergunta.Add(pergunta);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_evento = new SelectList(db.eventoes, "Id", "Nome", pergunta.id_evento);
+            ViewBag.id_evento = new SelectList(db.evento, "Id", "Nome", pergunta.id_evento);
             return View(pergunta);
         }
 
@@ -68,12 +68,12 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            pergunta pergunta = db.perguntas.Find(id);
+            pergunta pergunta = db.pergunta.Find(id);
             if (pergunta == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.id_evento = new SelectList(db.eventoes, "Id", "Nome", pergunta.id_evento);
+            ViewBag.id_evento = new SelectList(db.evento, "Id", "Nome", pergunta.id_evento);
             return View(pergunta);
         }
 
@@ -90,7 +90,7 @@ namespace Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.id_evento = new SelectList(db.eventoes, "Id", "Nome", pergunta.id_evento);
+            ViewBag.id_evento = new SelectList(db.evento, "Id", "Nome", pergunta.id_evento);
             return View(pergunta);
         }
 
@@ -101,7 +101,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            pergunta pergunta = db.perguntas.Find(id);
+            pergunta pergunta = db.pergunta.Find(id);
             if (pergunta == null)
             {
                 return HttpNotFound();
@@ -114,8 +114,8 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            pergunta pergunta = db.perguntas.Find(id);
-            db.perguntas.Remove(pergunta);
+            pergunta pergunta = db.pergunta.Find(id);
+            db.pergunta.Remove(pergunta);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

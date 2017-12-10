@@ -34,7 +34,7 @@ namespace Web
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
@@ -48,21 +48,21 @@ namespace Web
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",
-            //    clientSecret: "");
+            //    clientSecret: "")
 
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
-            //   consumerSecret: "");
+            //   consumerSecret: "")
 
             //app.UseFacebookAuthentication(
             //   appId: "",
-            //   appSecret: "");
+            //   appSecret: "")
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
             //    ClientId = "",
             //    ClientSecret = ""
-            //});
+            //})
         }
     }
 }

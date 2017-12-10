@@ -17,7 +17,7 @@ namespace Modelo.DAO
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public pergunta()
         {
-            this.respostas = new HashSet<resposta>();
+            this.resposta = new HashSet<resposta>();
         }
     
         public int Id { get; set; }
@@ -26,6 +26,6 @@ namespace Modelo.DAO
     
         public virtual evento evento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<resposta> respostas { get; set; }
+        public virtual ICollection<resposta> resposta { get; set; }
     }
 }

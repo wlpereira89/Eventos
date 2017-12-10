@@ -32,7 +32,7 @@ namespace Modelo.PN
             try
             {
                 EventosEntities db = new EventosEntities();
-                return db.usuarios;
+                return db.usuario;
             }
             catch (Exception)
             {
@@ -45,7 +45,7 @@ namespace Modelo.PN
             try
             {
                 EventosEntities db = new EventosEntities();
-                return db.usuarios.ToList();
+                return db.usuario.ToList();
             }
             catch (Exception)
             {
@@ -59,7 +59,7 @@ namespace Modelo.PN
             {
                 EventosEntities db = new EventosEntities();
 
-                return db.usuarios.SqlQuery("SELECT * FROM dbo.usuario WHERE newsletter=1;").ToList();
+                return db.usuario.SqlQuery("SELECT * FROM dbo.usuario WHERE newsletter=1;").ToList();
             }
             catch (Exception)
             {
@@ -72,7 +72,7 @@ namespace Modelo.PN
             try
             {
                 EventosEntities db = new EventosEntities();
-                usuario u = db.usuarios.Find(id);
+                usuario u = db.usuario.Find(id);
                 if (u == null)
                 {
                     return null;
@@ -91,7 +91,7 @@ namespace Modelo.PN
             {
                 u.cadastro = DateTime.Now;
                 EventosEntities db = new EventosEntities();
-                db.usuarios.Add(u);
+                db.usuario.Add(u);
                 db.SaveChanges();
             }
             catch (Exception)
@@ -122,7 +122,7 @@ namespace Modelo.PN
             {
                 EventosEntities db = new EventosEntities();
 
-                db.usuarios.Remove(db.usuarios.Find(id));
+                db.usuario.Remove(db.usuario.Find(id));
                 db.SaveChanges();
 
             }
@@ -153,7 +153,7 @@ namespace Modelo.PN
             try
             {
                 EventosEntities db = new EventosEntities();
-                return db.usuarios.Where(a => a.login.Equals(u.login) && a.pass.Equals(u.pass)).FirstOrDefault();
+                return db.usuario.Where(a => a.login.Equals(u.login) && a.pass.Equals(u.pass)).FirstOrDefault();
 
             }
             catch (Exception)
@@ -170,7 +170,7 @@ namespace Modelo.PN
                 EventosEntities db = new EventosEntities();
                 usuario user = new usuario();
                 //para mexer em um registro fazer a leitura de campo
-                user = db.usuarios.Find(u.CPF);// CONFERIR
+                user = db.usuario.Find(u.CPF);// CONFERIR
                 user.login = u.login;
                 user.pass = u.pass;
                 user.Nome = u.login;
@@ -201,7 +201,7 @@ namespace Modelo.PN
                 EventosEntities db = new EventosEntities();
 
                 //EventosEntities db = new EventosEntities();
-                return db.usuarios.Find(CPF);
+                return db.usuario.Find(CPF);
 
             }
             catch (Exception)

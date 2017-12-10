@@ -17,13 +17,13 @@ namespace Modelo.DAO
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public evento()
         {
-            this.comentarios = new HashSet<comentario>();
-            this.participantes = new HashSet<participante>();
-            this.perguntas = new HashSet<pergunta>();
+            this.comentario = new HashSet<comentario>();
+            this.participante = new HashSet<participante>();
+            this.pergunta = new HashSet<pergunta>();
         }
     
         public int Id { get; set; }
-        public short Categoria { get; set; }
+        public string Categoria { get; set; }
         public Nullable<int> id_principal { get; set; }
         public string Nome { get; set; }
         public string Responsavel { get; set; }
@@ -32,16 +32,17 @@ namespace Modelo.DAO
         public string palavra_chave2 { get; set; }
         public short limite_participantes { get; set; }
         public string Local { get; set; }
-        public Nullable<System.DateTime> data_hr_ini { get; set; }
+        public Nullable<System.DateTime> Data { get; set; }
         public Nullable<System.DateTime> data_hora_fim { get; set; }
+        public Nullable<bool> emitidos { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<comentario> comentarios { get; set; }
+        public virtual ICollection<comentario> comentario { get; set; }
         public virtual evento_composto evento_composto { get; set; }
         public virtual usuario usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<participante> participantes { get; set; }
+        public virtual ICollection<participante> participante { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<pergunta> perguntas { get; set; }
+        public virtual ICollection<pergunta> pergunta { get; set; }
     }
 }

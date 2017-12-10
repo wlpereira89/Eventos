@@ -6,34 +6,29 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Modelo.DAO;
 using Modelo.PN;
+using Modelo.DAO;
 
 namespace Web.Controllers
 {
-    public class eventoController : Controller
+    public class eventosController : Controller
     {
         private EventosEntities db = new EventosEntities();
 
-        public ActionResult Lista()
-        {
-            return View(pnEventos.Listar());
-        }
-
-        // GET: evento
+        // GET: eventos
         public ActionResult Index()
         {
             return View(pnEventos.Listar());
         }
 
-        // GET: evento/Details/5
+        // GET: eventos/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            evento evento = db.evento.Find(id);
+            evento evento = pnEventos.Procurar(id);
             if (evento == null)
             {
                 return HttpNotFound();
@@ -41,104 +36,116 @@ namespace Web.Controllers
             return View(evento);
         }
 
-        // GET: evento/Create
+        // GET: eventos/Create
         public ActionResult Create()
         {
-            //ViewBag.Id = new SelectList(db.comentarios, "Id", "login");
             ViewBag.id_principal = new SelectList(db.evento_composto, "Id", "Nome");
-            ViewBag.Responsavel = new SelectList(db.usuario, "login", "pass");
+            ViewBag.Responsavel = new SelectList(pnUsuarios.PegarDB(), "login", "Nome");
             return View();
         }
 
-        // POST: evento/Create
+        // POST: eventos/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Categoria,id_principal,Nome,Responsavel,Cancelado,palavra_chave,palavra_chave2,limite_participantes,Local,Data,data_hora_fim")] evento evento)
+        public ActionResult Create([Bind(Include = "Id,Categoria,id_principal,Nome,Responsavel,palavra_chave,palavra_chave2,limite_participantes,Local,Data")] evento evento)
         {
-            db.evento.Add(evento);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                pnEventos.Cadastrar(evento);
+                return RedirectToAction("Index");
+            }
 
-            //ViewBag.Id = new SelectList(db.comentarios, "Id", "login", evento.Id);
             ViewBag.id_principal = new SelectList(db.evento_composto, "Id", "Nome", evento.id_principal);
-            ViewBag.Responsavel = new SelectList(db.usuario, "login", "pass", evento.Responsavel);
+            ViewBag.Responsavel = new SelectList(pnUsuarios.PegarDB(), "login", "Nome", evento.Responsavel);
             return View(evento);
         }
 
-        // GET: evento/Edit/5
+        // GET: eventos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            evento evento = db.evento.Find(id);
+            evento evento = pnEventos.Procurar(id);
             if (evento == null)
             {
                 return HttpNotFound();
             }
-            //ViewBag.Id = new SelectList(db.comentarios, "Id", "login", evento.Id);
             ViewBag.id_principal = new SelectList(db.evento_composto, "Id", "Nome", evento.id_principal);
             ViewBag.Responsavel = new SelectList(db.usuario, "login", "pass", evento.Responsavel);
             return View(evento);
         }
 
-        // POST: evento/Edit/5
+        // POST: eventos/Edit/5
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Categoria,id_principal,Nome,Responsavel,Cancelado,palavra_chave,palavra_chave2,limite_participantes,Local,Data,data_hora_fim")] evento evento)
+        public ActionResult Edit([Bind(Include = "Id,Categoria,id_principal,Nome,Responsavel,palavra_chave,palavra_chave2,limite_participantes,Local,Data")] evento evento)
         {
             if (ModelState.IsValid)
             {
                 pnEventos.Editar(evento);
                 return RedirectToAction("Index");
             }
-            //ViewBag.Id = new SelectList(db.comentarios, "Id", "login", evento.Id);
             ViewBag.id_principal = new SelectList(db.evento_composto, "Id", "Nome", evento.id_principal);
-            ViewBag.Responsavel = new SelectList(db.usuario, "login", "pass", evento.Responsavel);
+            ViewBag.Responsavel = new SelectList(pnUsuarios.PegarDB(), "login", "Nome", evento.Responsavel);
             return View(evento);
         }
 
-        // GET: evento/Delete/5
+        // GET: eventos/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            evento evento = db.evento.Find(id);
+            evento evento = pnEventos.Procurar(id);
             if (evento == null)
             {
                 return HttpNotFound();
             }
             return View(evento);
         }
-
-        public ActionResult Maps()
+        public ActionResult Cancelar(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            pnEventos.Cancelar(id);
+            return RedirectToAction("Index");
         }
-        // POST: evento/Delete/5
+        public ActionResult RemoverCancelamento(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            pnEventos.RemoverCancelamento(id);
+            return RedirectToAction("Index");
+        }
+
+        // POST: eventos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            evento evento = db.evento.Find(id);
-            db.evento.Remove(evento);
-            db.SaveChanges();
+
+            pnEventos.Excluir(id);
             return RedirectToAction("Index");
+        }
+        public ActionResult Maps()
+        {
+            return View();
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            pnEventos.Dispose(disposing);
             base.Dispose(disposing);
         }
     }

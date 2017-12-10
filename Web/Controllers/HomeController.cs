@@ -71,7 +71,7 @@ namespace Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             usuario usuario = pnUsuarios.Procurar(id);
-            if (usuario == null)
+            if (usuario == null) 
             {
                 return HttpNotFound();
             }
@@ -108,7 +108,7 @@ namespace Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             usuario usuario = pnUsuarios.Procurar(id);
-            if (usuario == null)
+            if (usuario == null) 
             {
                 return HttpNotFound();
             }
@@ -224,12 +224,12 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                List < usuario > usuarios= pnUsuarios.ListarNews();
+                List<usuario> usuarios = pnUsuarios.ListarNews();
                 foreach (var user in usuarios)
                 {
                     await pnEmail.EnviarMailAsync(model, user.Email);
                 }
-                
+
                 return RedirectToAction("Index");
                 
             }

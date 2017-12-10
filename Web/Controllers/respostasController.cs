@@ -17,7 +17,7 @@ namespace Web.Controllers
         // GET: respostas
         public ActionResult Index()
         {
-            var respostas = db.respostas.Include(r => r.pergunta).Include(r => r.usuario1);
+            var respostas = db.resposta.Include(r => r.pergunta).Include(r => r.usuario1);
             return View(respostas.ToList());
         }
 
@@ -28,7 +28,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            resposta resposta = db.respostas.Find(id);
+            resposta resposta = db.resposta.Find(id);
             if (resposta == null)
             {
                 return HttpNotFound();
@@ -39,8 +39,8 @@ namespace Web.Controllers
         // GET: respostas/Create
         public ActionResult Create()
         {
-            ViewBag.id_pergunta = new SelectList(db.perguntas, "Id", "pergunta1");
-            ViewBag.usuario = new SelectList(db.usuarios, "login", "pass");
+            ViewBag.id_pergunta = new SelectList(db.pergunta, "Id", "pergunta1");
+            ViewBag.usuario = new SelectList(db.usuario, "login", "pass");
             return View();
         }
 
@@ -53,13 +53,13 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.respostas.Add(resposta);
+                db.resposta.Add(resposta);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_pergunta = new SelectList(db.perguntas, "Id", "pergunta1", resposta.id_pergunta);
-            ViewBag.usuario = new SelectList(db.usuarios, "login", "pass", resposta.usuario);
+            ViewBag.id_pergunta = new SelectList(db.pergunta, "Id", "pergunta1", resposta.id_pergunta);
+            ViewBag.usuario = new SelectList(db.usuario, "login", "pass", resposta.usuario);
             return View(resposta);
         }
 
@@ -70,13 +70,13 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            resposta resposta = db.respostas.Find(id);
+            resposta resposta = db.resposta.Find(id);
             if (resposta == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.id_pergunta = new SelectList(db.perguntas, "Id", "pergunta1", resposta.id_pergunta);
-            ViewBag.usuario = new SelectList(db.usuarios, "login", "pass", resposta.usuario);
+            ViewBag.id_pergunta = new SelectList(db.pergunta, "Id", "pergunta1", resposta.id_pergunta);
+            ViewBag.usuario = new SelectList(db.usuario, "login", "pass", resposta.usuario);
             return View(resposta);
         }
 
@@ -93,8 +93,8 @@ namespace Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.id_pergunta = new SelectList(db.perguntas, "Id", "pergunta1", resposta.id_pergunta);
-            ViewBag.usuario = new SelectList(db.usuarios, "login", "pass", resposta.usuario);
+            ViewBag.id_pergunta = new SelectList(db.pergunta, "Id", "pergunta1", resposta.id_pergunta);
+            ViewBag.usuario = new SelectList(db.usuario, "login", "pass", resposta.usuario);
             return View(resposta);
         }
 
@@ -105,7 +105,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            resposta resposta = db.respostas.Find(id);
+            resposta resposta = db.resposta.Find(id);
             if (resposta == null)
             {
                 return HttpNotFound();
@@ -118,8 +118,8 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            resposta resposta = db.respostas.Find(id);
-            db.respostas.Remove(resposta);
+            resposta resposta = db.resposta.Find(id);
+            db.resposta.Remove(resposta);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

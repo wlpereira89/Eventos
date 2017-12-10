@@ -15,7 +15,7 @@ namespace Modelo.PN
             try
             {
                 EventosEntities db = new EventosEntities();
-                var participantes = db.participantes.Include(p => p.evento).Include(p => p.usuario);
+                var participantes = db.participante.Include(p => p.evento).Include(p => p.usuario);
                 return participantes.ToList();
             }
             catch (Exception)
@@ -31,7 +31,7 @@ namespace Modelo.PN
                 var ids = id.Split('-');
                 EventosEntities db = new EventosEntities();
 
-                var participantes = db.participantes.SqlQuery("SELECT * FROM dbo.participante WHERE id_evento="+ids[0]+" AND login="+ids[1]+";").ToList();
+                var participantes = db.participante.SqlQuery("SELECT * FROM dbo.participante WHERE id_evento="+ids[0]+" AND login="+ids[1]+";").ToList();
 
                 if (participantes[0] == null)
                 {
@@ -51,7 +51,7 @@ namespace Modelo.PN
             {
                 u.cadastro = DateTime.Now;
                 EventosEntities db = new EventosEntities();
-                db.usuarios.Add(u);
+                db.usuario.Add(u);
                 db.SaveChanges();
             }
             catch (Exception)
@@ -69,9 +69,9 @@ namespace Modelo.PN
 
                 EventosEntities db = new EventosEntities();
                 var ids = id.Split('-');
-                var participantes = db.participantes.SqlQuery("SELECT * FROM dbo.participante WHERE id_evento=" + ids[0] + " AND login=" + ids[1] + ";").ToList();
+                var participantes = db.participante.SqlQuery("SELECT * FROM dbo.participante WHERE id_evento=" + ids[0] + " AND login=" + ids[1] + ";").ToList();
 
-                db.participantes.Remove(participantes[0]);
+                db.participante.Remove(participantes[0]);
                 db.SaveChanges();
 
             }

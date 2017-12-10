@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="EventosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="EventosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__RefactorLog">
           <Key>
             <PropertyRef Name="OperationKey" />
@@ -26,7 +26,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Categoria" Type="smallint" Nullable="false" />
+          <Property Name="Categoria" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="id_principal" Type="int" />
           <Property Name="Nome" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="Responsavel" Type="nvarchar" MaxLength="30" Nullable="false" />
@@ -35,8 +35,9 @@
           <Property Name="palavra_chave2" Type="nvarchar" MaxLength="50" />
           <Property Name="limite_participantes" Type="smallint" Nullable="false" />
           <Property Name="Local" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="data_hr_ini" Type="datetime" />
+          <Property Name="Data" Type="datetime" />
           <Property Name="data_hora_fim" Type="datetime" />
+          <Property Name="emitidos" Type="bit" />
         </EntityType>
         <EntityType Name="evento_composto">
           <Key>
@@ -90,7 +91,9 @@
           <Property Name="newsletter" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_comentario _ToTable_1">
-          <End Role="evento" Type="Self.evento" Multiplicity="1" />
+          <End Role="evento" Type="Self.evento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="comentario" Type="Self.comentario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="evento">
@@ -102,7 +105,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_comentario_ToTable">
-          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="comentario" Type="Self.comentario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="usuario">
@@ -114,7 +119,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_evento_ToTable">
-          <End Role="evento_composto" Type="Self.evento_composto" Multiplicity="0..1" />
+          <End Role="evento_composto" Type="Self.evento_composto" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="evento" Type="Self.evento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="evento_composto">
@@ -138,7 +145,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_participante_ToTable">
-          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="participante" Type="Self.participante" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="usuario">
@@ -150,7 +159,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_participante_ToTable_1">
-          <End Role="evento" Type="Self.evento" Multiplicity="1" />
+          <End Role="evento" Type="Self.evento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="participante" Type="Self.participante" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="evento">
@@ -162,7 +173,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_perguntas_ToTable_1">
-          <End Role="evento" Type="Self.evento" Multiplicity="1" />
+          <End Role="evento" Type="Self.evento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="pergunta" Type="Self.pergunta" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="evento">
@@ -174,7 +187,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_resposta_ToTable">
-          <End Role="pergunta" Type="Self.pergunta" Multiplicity="1" />
+          <End Role="pergunta" Type="Self.pergunta" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="resposta" Type="Self.resposta" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="pergunta">
@@ -186,7 +201,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_resposta_ToTable_1">
-          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="resposta" Type="Self.resposta" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="usuario">
@@ -243,7 +260,8 @@
             <End Role="resposta" EntitySet="resposta" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EventosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -270,7 +288,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Categoria" Type="Int16" Nullable="false" />
+          <Property Name="Categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="id_principal" Type="Int32" />
           <Property Name="Nome" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Responsavel" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
@@ -279,13 +297,14 @@
           <Property Name="palavra_chave2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="limite_participantes" Type="Int16" Nullable="false" />
           <Property Name="Local" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="data_hr_ini" Type="DateTime" Precision="3" />
+          <Property Name="Data" Type="DateTime" Precision="3" />
           <Property Name="data_hora_fim" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="comentarios" Relationship="Self.FK_comentario__ToTable_1" FromRole="evento" ToRole="comentario" />
+          <Property Name="emitidos" Type="Boolean" />
+          <NavigationProperty Name="comentario" Relationship="Self.FK_comentario__ToTable_1" FromRole="evento" ToRole="comentario" />
           <NavigationProperty Name="evento_composto" Relationship="Self.FK_evento_ToTable" FromRole="evento" ToRole="evento_composto" />
           <NavigationProperty Name="usuario" Relationship="Self.FK_evento_ToTable_1" FromRole="evento" ToRole="usuario" />
-          <NavigationProperty Name="participantes" Relationship="Self.FK_participante_ToTable_1" FromRole="evento" ToRole="participante" />
-          <NavigationProperty Name="perguntas" Relationship="Self.FK_perguntas_ToTable_1" FromRole="evento" ToRole="pergunta" />
+          <NavigationProperty Name="participante" Relationship="Self.FK_participante_ToTable_1" FromRole="evento" ToRole="participante" />
+          <NavigationProperty Name="pergunta" Relationship="Self.FK_perguntas_ToTable_1" FromRole="evento" ToRole="pergunta" />
         </EntityType>
         <EntityType Name="evento_composto">
           <Key>
@@ -293,7 +312,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nome" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="eventoes" Relationship="Self.FK_evento_ToTable" FromRole="evento_composto" ToRole="evento" />
+          <NavigationProperty Name="evento" Relationship="Self.FK_evento_ToTable" FromRole="evento_composto" ToRole="evento" />
         </EntityType>
         <EntityType Name="participante">
           <Key>
@@ -314,7 +333,7 @@
           <Property Name="id_evento" Type="Int32" Nullable="false" />
           <Property Name="pergunta1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="evento" Relationship="Self.FK_perguntas_ToTable_1" FromRole="pergunta" ToRole="evento" />
-          <NavigationProperty Name="respostas" Relationship="Self.FK_resposta_ToTable" FromRole="pergunta" ToRole="resposta" />
+          <NavigationProperty Name="resposta" Relationship="Self.FK_resposta_ToTable" FromRole="pergunta" ToRole="resposta" />
         </EntityType>
         <EntityType Name="resposta">
           <Key>
@@ -333,24 +352,26 @@
           </Key>
           <Property Name="login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pass" Type="String" MaxLength="8" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Endereco" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CEP" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Nascimento" Type="DateTime" Precision="0" />
           <Property Name="cadastro" Type="DateTime" Precision="0" />
           <Property Name="CPF" Type="String" MaxLength="14" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="RG" Type="String" MaxLength="12" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="r_phone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="cel_phone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
           <Property Name="newsletter" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="comentarios" Relationship="Self.FK_comentario_ToTable" FromRole="usuario" ToRole="comentario" />
-          <NavigationProperty Name="eventoes" Relationship="Self.FK_evento_ToTable_1" FromRole="usuario" ToRole="evento" />
-          <NavigationProperty Name="participantes" Relationship="Self.FK_participante_ToTable" FromRole="usuario" ToRole="participante" />
-          <NavigationProperty Name="respostas" Relationship="Self.FK_resposta_ToTable_1" FromRole="usuario" ToRole="resposta" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="comentario" Relationship="Self.FK_comentario_ToTable" FromRole="usuario" ToRole="comentario" />
+          <NavigationProperty Name="evento" Relationship="Self.FK_evento_ToTable_1" FromRole="usuario" ToRole="evento" />
+          <NavigationProperty Name="participante" Relationship="Self.FK_participante_ToTable" FromRole="usuario" ToRole="participante" />
+          <NavigationProperty Name="resposta" Relationship="Self.FK_resposta_ToTable_1" FromRole="usuario" ToRole="resposta" />
         </EntityType>
         <Association Name="FK_comentario__ToTable_1">
-          <End Role="evento" Type="Self.evento" Multiplicity="1" />
+          <End Role="evento" Type="Self.evento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="comentario" Type="Self.comentario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="evento">
@@ -362,7 +383,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_comentario_ToTable">
-          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="comentario" Type="Self.comentario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="usuario">
@@ -374,7 +397,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_evento_ToTable">
-          <End Role="evento_composto" Type="Self.evento_composto" Multiplicity="0..1" />
+          <End Role="evento_composto" Type="Self.evento_composto" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="evento" Type="Self.evento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="evento_composto">
@@ -398,7 +423,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_participante_ToTable_1">
-          <End Role="evento" Type="Self.evento" Multiplicity="1" >
+          <End Role="evento" Type="Self.evento" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="participante" Type="Self.participante" Multiplicity="*" />
@@ -412,7 +437,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_perguntas_ToTable_1">
-          <End Role="evento" Type="Self.evento" Multiplicity="1" />
+          <End Role="evento" Type="Self.evento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="pergunta" Type="Self.pergunta" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="evento">
@@ -424,7 +451,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_participante_ToTable">
-          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="participante" Type="Self.participante" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="usuario">
@@ -436,7 +465,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_resposta_ToTable">
-          <End Role="pergunta" Type="Self.pergunta" Multiplicity="1" />
+          <End Role="pergunta" Type="Self.pergunta" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="resposta" Type="Self.resposta" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="pergunta">
@@ -448,7 +479,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_resposta_ToTable_1">
-          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="resposta" Type="Self.resposta" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="usuario">
@@ -461,48 +494,48 @@
         </Association>
         <EntityContainer Name="EventosEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
-          <EntitySet Name="comentarios" EntityType="Self.comentario" />
-          <EntitySet Name="eventoes" EntityType="Self.evento" />
+          <EntitySet Name="comentario" EntityType="Self.comentario" />
+          <EntitySet Name="evento" EntityType="Self.evento" />
           <EntitySet Name="evento_composto" EntityType="Self.evento_composto" />
-          <EntitySet Name="participantes" EntityType="Self.participante" />
-          <EntitySet Name="perguntas" EntityType="Self.pergunta" />
-          <EntitySet Name="respostas" EntityType="Self.resposta" />
-          <EntitySet Name="usuarios" EntityType="Self.usuario" />
+          <EntitySet Name="participante" EntityType="Self.participante" />
+          <EntitySet Name="pergunta" EntityType="Self.pergunta" />
+          <EntitySet Name="resposta" EntityType="Self.resposta" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
           <AssociationSet Name="FK_comentario__ToTable_1" Association="Self.FK_comentario__ToTable_1">
-            <End Role="evento" EntitySet="eventoes" />
-            <End Role="comentario" EntitySet="comentarios" />
+            <End Role="evento" EntitySet="evento" />
+            <End Role="comentario" EntitySet="comentario" />
           </AssociationSet>
           <AssociationSet Name="FK_comentario_ToTable" Association="Self.FK_comentario_ToTable">
-            <End Role="usuario" EntitySet="usuarios" />
-            <End Role="comentario" EntitySet="comentarios" />
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="comentario" EntitySet="comentario" />
           </AssociationSet>
           <AssociationSet Name="FK_evento_ToTable" Association="Self.FK_evento_ToTable">
             <End Role="evento_composto" EntitySet="evento_composto" />
-            <End Role="evento" EntitySet="eventoes" />
+            <End Role="evento" EntitySet="evento" />
           </AssociationSet>
           <AssociationSet Name="FK_evento_ToTable_1" Association="Self.FK_evento_ToTable_1">
-            <End Role="usuario" EntitySet="usuarios" />
-            <End Role="evento" EntitySet="eventoes" />
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="evento" EntitySet="evento" />
           </AssociationSet>
           <AssociationSet Name="FK_participante_ToTable_1" Association="Self.FK_participante_ToTable_1">
-            <End Role="evento" EntitySet="eventoes" />
-            <End Role="participante" EntitySet="participantes" />
+            <End Role="evento" EntitySet="evento" />
+            <End Role="participante" EntitySet="participante" />
           </AssociationSet>
           <AssociationSet Name="FK_perguntas_ToTable_1" Association="Self.FK_perguntas_ToTable_1">
-            <End Role="evento" EntitySet="eventoes" />
-            <End Role="pergunta" EntitySet="perguntas" />
+            <End Role="evento" EntitySet="evento" />
+            <End Role="pergunta" EntitySet="pergunta" />
           </AssociationSet>
           <AssociationSet Name="FK_participante_ToTable" Association="Self.FK_participante_ToTable">
-            <End Role="usuario" EntitySet="usuarios" />
-            <End Role="participante" EntitySet="participantes" />
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="participante" EntitySet="participante" />
           </AssociationSet>
           <AssociationSet Name="FK_resposta_ToTable" Association="Self.FK_resposta_ToTable">
-            <End Role="pergunta" EntitySet="perguntas" />
-            <End Role="resposta" EntitySet="respostas" />
+            <End Role="pergunta" EntitySet="pergunta" />
+            <End Role="resposta" EntitySet="resposta" />
           </AssociationSet>
           <AssociationSet Name="FK_resposta_ToTable_1" Association="Self.FK_resposta_ToTable_1">
-            <End Role="usuario" EntitySet="usuarios" />
-            <End Role="resposta" EntitySet="respostas" />
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="resposta" EntitySet="resposta" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -518,7 +551,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="comentarios">
+          <EntitySetMapping Name="comentario">
             <EntityTypeMapping TypeName="EventosModel.comentario">
               <MappingFragment StoreEntitySet="comentario">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -529,7 +562,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="eventoes">
+          <EntitySetMapping Name="evento">
             <EntityTypeMapping TypeName="EventosModel.evento">
               <MappingFragment StoreEntitySet="evento">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -542,8 +575,9 @@
                 <ScalarProperty Name="palavra_chave2" ColumnName="palavra_chave2" />
                 <ScalarProperty Name="limite_participantes" ColumnName="limite_participantes" />
                 <ScalarProperty Name="Local" ColumnName="Local" />
-                <ScalarProperty Name="data_hr_ini" ColumnName="data_hr_ini" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="data_hora_fim" ColumnName="data_hora_fim" />
+                <ScalarProperty Name="emitidos" ColumnName="emitidos" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -555,7 +589,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="participantes">
+          <EntitySetMapping Name="participante">
             <EntityTypeMapping TypeName="EventosModel.participante">
               <MappingFragment StoreEntitySet="participante">
                 <ScalarProperty Name="login" ColumnName="login" />
@@ -564,7 +598,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="perguntas">
+          <EntitySetMapping Name="pergunta">
             <EntityTypeMapping TypeName="EventosModel.pergunta">
               <MappingFragment StoreEntitySet="pergunta">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -573,7 +607,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="respostas">
+          <EntitySetMapping Name="resposta">
             <EntityTypeMapping TypeName="EventosModel.resposta">
               <MappingFragment StoreEntitySet="resposta">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -583,19 +617,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="usuarios">
+          <EntitySetMapping Name="usuario">
             <EntityTypeMapping TypeName="EventosModel.usuario">
               <MappingFragment StoreEntitySet="usuario">
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="Endereco" ColumnName="Endereco" />
                 <ScalarProperty Name="CEP" ColumnName="CEP" />
                 <ScalarProperty Name="Nascimento" ColumnName="Nascimento" />
                 <ScalarProperty Name="cadastro" ColumnName="cadastro" />
                 <ScalarProperty Name="CPF" ColumnName="CPF" />
                 <ScalarProperty Name="RG" ColumnName="RG" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="r_phone" ColumnName="r_phone" />
                 <ScalarProperty Name="cel_phone" ColumnName="cel_phone" />
                 <ScalarProperty Name="newsletter" ColumnName="newsletter" />
@@ -616,7 +650,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

@@ -192,6 +192,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\comentariosController.cs" />
     <Compile Include="Controllers\eventoesController.cs" />
+    <Compile Include="Controllers\eventosController.cs" />
     <Compile Include="Controllers\evento_compostoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -321,6 +322,12 @@
     <Content Include="Views\evento_composto\Lista.cshtml" />
     <Content Include="Views\Home\Mailing.cshtml" />
     <Content Include="Views\participantes\LPresenca.cshtml" />
+    <Content Include="Views\eventos\Create.cshtml" />
+    <Content Include="Views\eventos\Delete.cshtml" />
+    <Content Include="Views\eventos\Details.cshtml" />
+    <Content Include="Views\eventos\Edit.cshtml" />
+    <Content Include="Views\eventos\Index.cshtml" />
+    <Content Include="Views\eventos\Maps.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

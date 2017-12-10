@@ -17,33 +17,33 @@ namespace Modelo.DAO
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public usuario()
         {
-            this.comentarios = new HashSet<comentario>();
-            this.eventoes = new HashSet<evento>();
-            this.participantes = new HashSet<participante>();
-            this.respostas = new HashSet<resposta>();
+            this.comentario = new HashSet<comentario>();
+            this.evento = new HashSet<evento>();
+            this.participante = new HashSet<participante>();
+            this.resposta = new HashSet<resposta>();
         }
     
         public string login { get; set; }
         public string pass { get; set; }
+        public string Nome { get; set; }
         public string Endereco { get; set; }
         public string CEP { get; set; }
         public Nullable<System.DateTime> Nascimento { get; set; }
         public Nullable<System.DateTime> cadastro { get; set; }
         public string CPF { get; set; }
         public string RG { get; set; }
+        public string Email { get; set; }
         public string r_phone { get; set; }
         public string cel_phone { get; set; }
         public bool newsletter { get; set; }
-        public string Email { get; set; }
-        public string Nome { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<comentario> comentarios { get; set; }
+        public virtual ICollection<comentario> comentario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<evento> eventoes { get; set; }
+        public virtual ICollection<evento> evento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<participante> participantes { get; set; }
+        public virtual ICollection<participante> participante { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<resposta> respostas { get; set; }
+        public virtual ICollection<resposta> resposta { get; set; }
     }
 }

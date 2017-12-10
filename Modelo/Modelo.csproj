@@ -104,7 +104,6 @@
     </EntityDeploy>
     <None Include="DAO\Eventos.edmx.diagram">
       <DependentUpon>Eventos.edmx</DependentUpon>
-      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
