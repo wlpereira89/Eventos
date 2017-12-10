@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Modelo.DAO;
+using Modelo.PN;
 
 namespace Web.Controllers
 {
@@ -17,13 +18,13 @@ namespace Web.Controllers
 
         public ActionResult Lista()
         {
-            return View(db.evento_composto.ToList());
+            return View(pnEventosCompostos.Listar());
         }
 
         // GET: evento_composto
         public ActionResult Index()
         {
-            return View(db.evento_composto.ToList());
+            return View(pnEventosCompostos.Listar());
         }
 
         // GET: evento_composto/Details/5
@@ -33,7 +34,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            evento_composto evento_composto = db.evento_composto.Find(id);
+            evento_composto evento_composto = pnEventosCompostos.Procurar(id);
             if (evento_composto == null)
             {
                 return HttpNotFound();
@@ -55,9 +56,8 @@ namespace Web.Controllers
         public ActionResult Create([Bind(Include = "Nome")] evento_composto evento_composto)
         {
             if (ModelState.IsValid)
-            {            
-                db.evento_composto.Add(evento_composto);
-                db.SaveChanges();
+            {
+                pnEventosCompostos.Cadastrar(evento_composto);
                 return RedirectToAction("Index");
             }
 
@@ -71,7 +71,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            evento_composto evento_composto = db.evento_composto.Find(id);
+            evento_composto evento_composto = pnEventosCompostos.Procurar(id);
             if (evento_composto == null)
             {
                 return HttpNotFound();
@@ -84,12 +84,11 @@ namespace Web.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Nome")] evento_composto evento_composto)
+        public ActionResult Edit([Bind(Include = "Id, Nome")] evento_composto evento_composto)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(evento_composto).State = EntityState.Modified;
-                db.SaveChanges();
+                pnEventosCompostos.Editar(evento_composto);
                 return RedirectToAction("Index");
             }
             return View(evento_composto);
@@ -102,7 +101,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            evento_composto evento_composto = db.evento_composto.Find(id);
+            evento_composto evento_composto = pnEventosCompostos.Procurar(id);
             if (evento_composto == null)
             {
                 return HttpNotFound();
@@ -115,9 +114,7 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            evento_composto evento_composto = db.evento_composto.Find(id);
-            db.evento_composto.Remove(evento_composto);
-            db.SaveChanges();
+            pnEventosCompostos.Excluir(id);
             return RedirectToAction("Index");
         }
 
