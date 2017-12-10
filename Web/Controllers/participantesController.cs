@@ -13,7 +13,7 @@ namespace Web.Controllers
 {
     public class participantesController : Controller
     {
-        private EventosEntities db = new EventosEntities();
+        //private EventosEntities db = new EventosEntities();
 
         // GET: participantes
         public ActionResult Index()
@@ -39,8 +39,8 @@ namespace Web.Controllers
         // GET: participantes/Create
         public ActionResult Create()
         {
-            ViewBag.id_evento = new SelectList(db.evento, "Id", "Nome");
-            ViewBag.login = new SelectList(db.usuario, "login", "Nome");
+            ViewBag.id_evento = new SelectList(pnEventos.PegarDB(), "Id", "Nome");
+            ViewBag.login = new SelectList(pnEventos.PegarDB(), "login", "Nome");
             return View();
         }
 
@@ -53,50 +53,40 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.participante.Add(participante);
-                db.SaveChanges();
+                pnParticipantes.Cadastrar(participante);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_evento = new SelectList(db.evento, "Id", "Nome", participante.id_evento);
-            ViewBag.login = new SelectList(db.usuario, "login", "Nome", participante.login);
+            ViewBag.id_evento = new SelectList(pnEventos.PegarDB(), "Id", "Nome", participante.id_evento);
+            ViewBag.login = new SelectList(pnEventos.PegarDB(), "login", "Nome", participante.login);
             return View(participante);
         }
 
         // GET: participantes/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Presente(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            participante participante = pnParticipantes.Procurar(id);
-            if (participante == null)
+            pnParticipantes.Presente(id);
+            
+            return RedirectToAction("Index");
+        }
+        public ActionResult Ausente(string id)
+        {
+            if (id == null)
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.id_evento = new SelectList(db.evento, "Id", "Nome", participante.id_evento);
-            ViewBag.login = new SelectList(db.usuario, "login", "Nome", participante.login);
-            return View(participante);
+            pnParticipantes.Ausente(id);
+            return RedirectToAction("Index");
         }
 
         // POST: participantes/Edit/5
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "login,id_evento,Presenca")] participante participante)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(participante).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.id_evento = new SelectList(pnEventos.PegarDB(), "Id", "Nome", participante.id_evento);
-            ViewBag.login = new SelectList(pnUsuarios.PegarDB(), "login", "Nome", participante.login);
-            return View(participante);
-        }
+
 
         // GET: participantes/Delete/5
         public ActionResult Delete(string id)
@@ -125,10 +115,7 @@ namespace Web.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            pnParticipantes.Dispose(disposing);            
             base.Dispose(disposing);
         }
     }

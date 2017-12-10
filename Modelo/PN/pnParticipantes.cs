@@ -57,12 +57,12 @@ namespace Modelo.PN
             }
         }
 
-        public static void Cadastrar(usuario u)
+        public static void Cadastrar(participante part)
         {
             try
             {
                 EventosEntities db = new EventosEntities();
-                db.usuario.Add(u);
+                db.participante.Add(part);
                 db.SaveChanges();
             }
             catch (Exception)
@@ -90,7 +90,61 @@ namespace Modelo.PN
             {
                 throw;
             }
+            
+        }
+        public static void Presente(string id)
+        {
+            try
+            {
+                EventosEntities db = new EventosEntities();
+                var ids = id.Split('-');
+                var participantes = db.participante.SqlQuery("SELECT * FROM dbo.participante WHERE id_evento=" + ids[0] + " AND login='" + ids[1] + "';").ToList();
+                participantes[0].Presenca = true;
+                db.Entry(participantes[0]).State = EntityState.Modified;
+                db.SaveChanges();
 
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        public static void Ausente(string id)
+        {
+            try
+            {
+                EventosEntities db = new EventosEntities();
+                var ids = id.Split('-');
+                var participantes = db.participante.SqlQuery("SELECT * FROM dbo.participante WHERE id_evento=" + ids[0] + " AND login='" + ids[1] + "';").ToList();
+                participantes[0].Presenca = false;
+                db.Entry(participantes[0]).State = EntityState.Modified;
+                db.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+
+        public static void Dispose(bool disposing)
+        {
+            try
+            {
+                EventosEntities db = new EventosEntities();
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
     }

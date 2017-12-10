@@ -37,7 +37,8 @@
             @Html.DisplayFor(modelItem => item.Presenca)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.evento.Id + "-" + item.usuario.login }) |
+            @Html.ActionLink("Presente", "Presente", new { id = item.evento.Id + "-" + item.usuario.login }) |
+            @Html.ActionLink("Ausente", "Ausente", new { id = item.evento.Id + "-" + item.usuario.login }) |
             @Html.ActionLink("Details", "Details", new { id = item.evento.Id + "-" + item.usuario.login }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.evento.Id+"-"+item.usuario.login})
         </td>
