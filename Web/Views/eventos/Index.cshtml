@@ -1,15 +1,46 @@
 ﻿@model IEnumerable<Modelo.DAO.evento>
 
-
-
 <!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <meta name="viewport" content="width=device-width" />
+    <meta property="og:url" content="http://localhost:29859/eventos/Index" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Index" />
+    <meta property="og:description" content="Your description" />
+    <meta property="og:image" content="http://localhost:29859" />
+
 </head>
 <body>
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.11';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    <script>
+        window.twttr = (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t._e = [];
+            t.ready = function (f) {
+                t._e.push(f);
+            };
+
+            return t;
+        }(document, "script", "twitter-wjs"));
+    </script>
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
@@ -21,9 +52,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
-            
+
             <th>
-               Palavra Chave
+                Palavra Chave
             </th>
             <th>
                 Palavra Chave 2
@@ -51,84 +82,96 @@
             </th>
             <th></th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Categoria)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>            
-            <td>
-                @Html.DisplayFor(modelItem => item.palavra_chave)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.palavra_chave2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.limite_participantes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Local)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data)
-            </td>
-            <td>
-                @if (item.emitidos == true)
-                {
-                    @Html.Name("Sim");                    
-                }
-                else
-                {
-                    @Html.Name("Não");
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.evento_composto.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.usuario.Nome)
-            </td>
-            <td>
-                @if (item.Cancelado == true)
-                {
-                    @Html.Name("Cancelado");
-                }
-                else
-                {
-                    if (item.Data > DateTime.Now)
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categoria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.palavra_chave)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.palavra_chave2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.limite_participantes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Local)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @if (item.emitidos == true)
                     {
-                        @Html.Name("Previsto");
+                        @Html.Name("Sim");
                     }
                     else
                     {
-                        @Html.Name("Realizado");
+                        @Html.Name("Não");
                     }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.evento_composto.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.usuario.Nome)
+                </td>
+                <td>
+                    @if (item.Cancelado == true)
+                    {
+                        @Html.Name("Cancelado");
+                    }
+                    else
+                    {
+                        if (item.Data > DateTime.Now)
+                        {
+                            @Html.Name("Previsto");
+                        }
+                        else
+                        {
+                            @Html.Name("Realizado");
+                        }
 
-                }
-            </td>
-            <td>
-                @Html.ActionLink("Como chegar?", "Maps")|<br />
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id })|<br />
-                @Html.ActionLink("Details", "Details", new { id = item.Id })|<br />
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })|<br />
-                @if (item.Data > DateTime.Now)
+                    }
+                </td>
+                <td>
+                    <div class="fb-share-button"
+                         data-href="https://www.facebook.com/utfpr"
+                         data-layout="button_count">
+                    </div>
+                    <div>
+                        
+                        <a class="twitter-share-button"
+                           href="https://twitter.com/intent/tweet?text=@Html.DisplayFor(modelItem=>item.Nome)">
+                            Tweet
+                        </a>
+                    </div>
+                    @Html.ActionLink("Como chegar?", "Maps")|<br />
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })|<br />
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })|<br />
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })|<br />
+                    @if (item.Data > DateTime.Now)
                 {
                     if (item.Cancelado)
                     {
-                        @Html.ActionLink("Remover Cancelamento", "RemoverCancelamento", new { id = item.Id });
+                            @Html.ActionLink("Remover Cancelamento", "RemoverCancelamento", new { id = item.Id });
                     }
                     else
                     {
-                        @Html.ActionLink("Cancelar", "Cancelar", new { id = item.Id });
+                            @Html.ActionLink("Cancelar", "Cancelar", new { id = item.Id });
                     }
                 }
-            </td>
-        </tr>
-    }
-    
+                </td>
+            </tr>
+        }
+
     </table>
 </body>
 </html>
