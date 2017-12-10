@@ -13,7 +13,7 @@ namespace Web.Controllers
 {
     public class perguntasController : Controller
     {
-        private EventosEntities db = new EventosEntities();
+        //private EventosEntities db = new EventosEntities();
 
         // GET: perguntas
         public ActionResult Index()
@@ -73,7 +73,7 @@ namespace Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.id_evento = new SelectList(db.evento, "Id", "Nome", pergunta.id_evento);
+            ViewBag.id_evento = new SelectList(pnEventos.PegarDB(), "Id", "Nome", pergunta.id_evento);
             return View(pergunta);
         }
 
@@ -89,7 +89,7 @@ namespace Web.Controllers
                 pnPerguntas.Editar(pergunta);
                 return RedirectToAction("Index");
             }
-            ViewBag.id_evento = new SelectList(db.evento, "Id", "Nome", pergunta.id_evento);
+            ViewBag.id_evento = new SelectList(pnEventos.PegarDB(), "Id", "Nome", pergunta.id_evento);
             return View(pergunta);
         }
 
