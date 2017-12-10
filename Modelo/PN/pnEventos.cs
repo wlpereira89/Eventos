@@ -28,7 +28,9 @@ namespace Modelo.PN
         {
             try
             {
+                
                 EventosEntities db = new EventosEntities();
+                var eventoes = db.eventoes.Include(e => e.comentarios).Include(e => e.evento_composto).Include(e => e.usuario);
                 return db.eventoes.ToList();
             }
             catch (Exception)

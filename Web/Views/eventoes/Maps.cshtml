@@ -5,12 +5,12 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <script src="https://maps.googleapis.com/maps/api/js"></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDY4ZfxyNIbSSVQh7AEIdvHnm3-FAThbNI"></script>
 
             <script language="javascript" type="text/javascript">
                 var exibirCaminhos;
                 var servicoDirecao = new google.maps.DirectionsService();
-
+                
                 function IniciarMapa() {
                     exibirCaminhos = new google.maps.DirectionsRenderer();
                     var latlng = new google.maps.LatLng(-15.682543, -47.978874);

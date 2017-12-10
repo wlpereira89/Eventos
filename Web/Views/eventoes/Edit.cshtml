@@ -94,16 +94,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.data_hr_ini, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.data_hr_ini, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.data_hr_ini, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.data_hr_ini, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.data_hora_fim, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.data_hora_fim, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.data_hora_fim, "", new { @class = "text-danger" })
             </div>
         </div>
 
