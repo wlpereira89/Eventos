@@ -327,6 +327,7 @@
     <Content Include="Views\eventos\Edit.cshtml" />
     <Content Include="Views\eventos\Index.cshtml" />
     <Content Include="Views\eventos\Maps.cshtml" />
+    <Content Include="Views\eventos\Lista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

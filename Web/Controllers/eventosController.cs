@@ -15,10 +15,14 @@ namespace Web.Controllers
 {
     public class eventosController : Controller
     {
-        private EventosEntities db = new EventosEntities();
+       // private EventosEntities db = new EventosEntities();
 
         // GET: eventos
         public ActionResult Index()
+        {
+            return View(pnEventos.Listar());
+        }
+        public ActionResult Lista()
         {
             return View(pnEventos.Listar());
         }
@@ -41,7 +45,7 @@ namespace Web.Controllers
         // GET: eventos/Create
         public ActionResult Create()
         {
-            ViewBag.id_principal = new SelectList(db.evento_composto, "Id", "Nome");
+            ViewBag.id_principal = new SelectList(pnEventosCompostos.PegarDB(), "Id", "Nome");
             ViewBag.Responsavel = new SelectList(pnUsuarios.PegarDB(), "login", "Nome");
             return View();
         }
@@ -59,7 +63,7 @@ namespace Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_principal = new SelectList(db.evento_composto, "Id", "Nome", evento.id_principal);
+            ViewBag.id_principal = new SelectList(pnEventosCompostos.PegarDB(), "Id", "Nome", evento.id_principal);
             ViewBag.Responsavel = new SelectList(pnUsuarios.PegarDB(), "login", "Nome", evento.Responsavel);
             return View(evento);
         }
@@ -76,8 +80,8 @@ namespace Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.id_principal = new SelectList(db.evento_composto, "Id", "Nome", evento.id_principal);
-            ViewBag.Responsavel = new SelectList(db.usuario, "login", "pass", evento.Responsavel);
+            ViewBag.id_principal = new SelectList(pnEventosCompostos.PegarDB(), "Id", "Nome", evento.id_principal);
+            ViewBag.Responsavel = new SelectList(pnUsuarios.PegarDB(), "login", "pass", evento.Responsavel);
             return View(evento);
         }
 
@@ -100,7 +104,7 @@ namespace Web.Controllers
                 pnEventos.Editar(evento);
                 return RedirectToAction("Index");
             }
-            ViewBag.id_principal = new SelectList(db.evento_composto, "Id", "Nome", evento.id_principal);
+            ViewBag.id_principal = new SelectList(pnEventosCompostos.PegarDB(), "Id", "Nome", evento.id_principal);
             ViewBag.Responsavel = new SelectList(pnUsuarios.PegarDB(), "login", "Nome", evento.Responsavel);
             return View(evento);
         }
