@@ -7,18 +7,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Modelo.DAO;
+using Modelo.PN;
 
 namespace Web.Controllers
 {
     public class respostasController : Controller
     {
-        private EventosEntities db = new EventosEntities();
+       // private EventosEntities db = new EventosEntities();
 
         // GET: respostas
         public ActionResult Index()
         {
-            var respostas = db.resposta.Include(r => r.pergunta).Include(r => r.usuario1);
-            return View(respostas.ToList());
+            
+            return View(pnRespostas.Listar());
         }
 
         // GET: respostas/Details/5
@@ -28,7 +29,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            resposta resposta = db.resposta.Find(id);
+            resposta resposta = pnRespostas.Procurar(id);
             if (resposta == null)
             {
                 return HttpNotFound();
@@ -39,8 +40,8 @@ namespace Web.Controllers
         // GET: respostas/Create
         public ActionResult Create()
         {
-            ViewBag.id_pergunta = new SelectList(db.pergunta, "Id", "pergunta1");
-            ViewBag.usuario = new SelectList(db.usuario, "login", "pass");
+            ViewBag.id_pergunta = new SelectList(pnPerguntas.PegarDB(), "Id", "pergunta1");
+            ViewBag.usuario = new SelectList(pnUsuarios.PegarDB(), "login", "pass");
             return View();
         }
 
@@ -53,13 +54,12 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.resposta.Add(resposta);
-                db.SaveChanges();
+                pnRespostas.Cadastrar(resposta);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_pergunta = new SelectList(db.pergunta, "Id", "pergunta1", resposta.id_pergunta);
-            ViewBag.usuario = new SelectList(db.usuario, "login", "pass", resposta.usuario);
+            ViewBag.id_pergunta = new SelectList(pnPerguntas.PegarDB(), "Id", "pergunta1", resposta.id_pergunta);
+            ViewBag.usuario = new SelectList(pnUsuarios.PegarDB(), "login", "pass", resposta.usuario);
             return View(resposta);
         }
 
@@ -70,13 +70,13 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            resposta resposta = db.resposta.Find(id);
+            resposta resposta = pnRespostas.Procurar(id);
             if (resposta == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.id_pergunta = new SelectList(db.pergunta, "Id", "pergunta1", resposta.id_pergunta);
-            ViewBag.usuario = new SelectList(db.usuario, "login", "pass", resposta.usuario);
+            ViewBag.id_pergunta = new SelectList(pnPerguntas.PegarDB(), "Id", "pergunta1", resposta.id_pergunta);
+            ViewBag.usuario = new SelectList(pnUsuarios.PegarDB(), "login", "pass", resposta.usuario);
             return View(resposta);
         }
 
@@ -85,16 +85,15 @@ namespace Web.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "usuario,id_pergunta,resposta1")] resposta resposta)
+        public ActionResult Edit([Bind(Include = "Id, usuario,id_pergunta,resposta1")] resposta resposta)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(resposta).State = EntityState.Modified;
-                db.SaveChanges();
+                pnRespostas.Editar(resposta);
                 return RedirectToAction("Index");
             }
-            ViewBag.id_pergunta = new SelectList(db.pergunta, "Id", "pergunta1", resposta.id_pergunta);
-            ViewBag.usuario = new SelectList(db.usuario, "login", "pass", resposta.usuario);
+            ViewBag.id_pergunta = new SelectList(pnPerguntas.PegarDB(), "Id", "pergunta1", resposta.id_pergunta);
+            ViewBag.usuario = new SelectList(pnUsuarios.PegarDB(), "login", "pass", resposta.usuario);
             return View(resposta);
         }
 
@@ -105,7 +104,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            resposta resposta = db.resposta.Find(id);
+            resposta resposta = pnRespostas.Procurar(id);
             if (resposta == null)
             {
                 return HttpNotFound();
@@ -118,18 +117,13 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            resposta resposta = db.resposta.Find(id);
-            db.resposta.Remove(resposta);
-            db.SaveChanges();
+            pnRespostas.Excluir(id);
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            pnRespostas.Dispose(disposing);
             base.Dispose(disposing);
         }
     }

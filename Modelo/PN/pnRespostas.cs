@@ -18,7 +18,7 @@ namespace Modelo.PN
             try
             {
                 EventosEntities db = new EventosEntities();
-                return db.resposta.ToList();
+                return db.resposta.Include(r => r.pergunta).Include(r => r.usuario1).ToList();
             }
             catch (Exception)
             {
@@ -91,7 +91,7 @@ namespace Modelo.PN
             }
 
         }
-        public static DbSet<resposta> PegarDB()
+        /*public static DbSet<resposta> PegarDB()
         {
             try
             {
@@ -103,7 +103,7 @@ namespace Modelo.PN
                 throw;
             }
 
-        }
+        }*/
         public static void Dispose(bool disposing)
         {
             try
