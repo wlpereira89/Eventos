@@ -328,6 +328,8 @@
     <Content Include="Views\eventos\Index.cshtml" />
     <Content Include="Views\eventos\Maps.cshtml" />
     <Content Include="Views\eventos\Lista.cshtml" />
+    <Content Include="Views\participantes\Certificado.cshtml" />
+    <Content Include="Views\participantes\NaoEmitido.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

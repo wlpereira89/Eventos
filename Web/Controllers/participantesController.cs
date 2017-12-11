@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Modelo.DAO;
 using Modelo.PN;
+using Modelo.VM;
 
 namespace Web.Controllers
 {
@@ -20,6 +21,8 @@ namespace Web.Controllers
         {            
             return View(pnParticipantes.Listar());
         }        
+
+
 
         // GET: participantes/Details/5
         public ActionResult Details(string id)
@@ -35,6 +38,7 @@ namespace Web.Controllers
             }
             return View(participante);
         }
+
 
         // GET: participantes/Create
         public ActionResult Create()
@@ -82,7 +86,25 @@ namespace Web.Controllers
             pnParticipantes.Ausente(id);
             return RedirectToAction("Index");
         }
-
+        public ActionResult Certificado(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            string[] dados = pnParticipantes.VerificarCertificado(id);
+            if (dados==null)
+            {
+                return RedirectToAction("NaoEmitido");
+            }
+            usuario u = pnUsuarios.Procurar(dados[1]);
+            evento ev = pnEventos.Procurar(Convert.ToInt32(dados[0]));
+            vmCertificado v = new vmCertificado();
+            v.nomeEvento = ev.Nome;
+            v.nomeUsuario = u.Nome;
+            v.data = ev.Data;
+            return View(v);            
+        }
         // POST: participantes/Edit/5
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -102,7 +124,10 @@ namespace Web.Controllers
             }
             return View(participante);
         }
-
+        public ActionResult NaoEmitido()
+        {
+            return View();
+        }
         // POST: participantes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -110,6 +110,26 @@ namespace Modelo.PN
             }
 
         }
+        public static void Emitir(int? id)
+        {
+            try
+            {
+                EventosEntities db = new EventosEntities();
+                evento e = db.evento.Find(id);
+                if (e.Data <= DateTime.Now)
+                {
+                    e.emitidos = true;
+                    db.Entry(e).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
         public static void RemoverCancelamento(int? id)
         {
             try

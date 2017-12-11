@@ -140,6 +140,23 @@ namespace Web.Controllers
             pnEventos.Cancelar(id);
             return RedirectToAction("Index");
         }
+        public async Task<ActionResult> EmitirCertificados(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            evento evento = pnEventos.Procurar(id);
+            string message = "O certificados do evento " + evento.Nome + "foram emitidos, favor verificar na pagina";
+            List<usuario> usuarios = pnParticipantes.ListarPorEvento(evento);
+            foreach (var user in usuarios)
+            {
+
+                await pnEmail.EnviarMailAsync(message, user.Email);
+            }
+            pnEventos.Emitir(id);
+            return RedirectToAction("Index");
+        }
         public ActionResult RemoverCancelamento(int? id)
         {
             if (id == null)

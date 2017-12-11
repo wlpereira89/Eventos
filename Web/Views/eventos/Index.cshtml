@@ -4,11 +4,11 @@
 <html>
 <head>
     <title>Index</title>
-    
+
 
 </head>
 <body>
-   
+
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
@@ -110,22 +110,26 @@
                     }
                 </td>
                 <td>
-                    
+
                     @Html.ActionLink("Como chegar?", "Maps")|<br />
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id })|<br />
                     @Html.ActionLink("Details", "Details", new { id = item.Id })|<br />
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })|<br />
                     @if (item.Data > DateTime.Now)
-                {
-                    if (item.Cancelado)
                     {
+                        if (item.Cancelado)
+                        {
                             @Html.ActionLink("Remover Cancelamento", "RemoverCancelamento", new { id = item.Id });
-                    }
-                    else
-                    {
+                        }
+                        else
+                        {
                             @Html.ActionLink("Cancelar", "Cancelar", new { id = item.Id });
+                        }
                     }
-                }
+                    else if((!item.Cancelado)&&(item.emitidos!=true))
+                    {
+                        @Html.ActionLink("Emitir Certificados", "EmitirCertificados", new { id = item.Id });
+                    }
                 </td>
             </tr>
         }

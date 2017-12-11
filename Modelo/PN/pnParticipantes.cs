@@ -22,7 +22,7 @@ namespace Modelo.PN
             {
                 throw;
             }
-            
+
         }
         public static List<usuario> ListarPorEvento(evento e)
         {
@@ -43,13 +43,32 @@ namespace Modelo.PN
                 var ids = id.Split('-');
                 EventosEntities db = new EventosEntities();
 
-                var participantes = db.participante.SqlQuery("SELECT * FROM dbo.participante WHERE id_evento="+ids[0]+" AND login='"+ids[1]+"';").ToList();
+                var participantes = db.participante.SqlQuery("SELECT * FROM dbo.participante WHERE id_evento=" + ids[0] + " AND login='" + ids[1] + "';").ToList();
 
                 if (participantes[0] == null)
                 {
                     return null;
                 }
                 return participantes[0];
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public static string[] VerificarCertificado(string id)
+        {
+            try
+            {
+                var ids = id.Split('-');
+                EventosEntities db = new EventosEntities();                
+                var participantes = db.participante.SqlQuery("SELECT * FROM dbo.participante WHERE id_evento=" + ids[0] + " AND login='" + ids[1] + "';").ToList();
+                evento ev = pnEventos.Procurar(Convert.ToInt32(ids[0]));
+                if ((participantes[0] == null) || (ev.emitidos!=true))
+                {
+                    return null;
+                }
+                return ids;
             }
             catch (Exception)
             {

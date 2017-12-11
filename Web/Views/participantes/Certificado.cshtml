@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Certificados";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div style="width:800px; height:600px; padding:20px; text-align:center; border: 10px solid #787878">
+        <div style="width:750px; height:550px; padding:20px; text-align:center; border: 5px solid #787878">
+            <span style="font-size:50px; font-weight:bold">Certificado de Curso</span>
+            <br><br>
+            <span style="font-size:25px"><i>Esse certificado é para:</i></span>
+            <br><br>
+            <span style="font-size:30px"><b>@Model.nomeUsuario</b></span><br /><br />
+            <span style="font-size:25px"><i>No Curso:</i></span> <br /><br />
+            <span style="font-size:30px">@Model.nomeEvento</span> <br /><br />
+            <span style="font-size:20px"><b>Com Honra</b></span> <br /><br /><br /><br />
+            <span style="font-size:25px"><i>Data Curso:</i></span><br>
+             
+            <span style="font-size:30px">@Model.data.ToString().Split(' ')[0]</span>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

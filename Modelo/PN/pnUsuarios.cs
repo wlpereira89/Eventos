@@ -84,7 +84,7 @@ namespace Modelo.PN
                 throw;
             }
 
-        }
+        }        
         public static void Cadastrar(usuario u)
         {
             try

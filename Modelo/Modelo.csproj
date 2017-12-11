@@ -96,6 +96,7 @@
     <Compile Include="PN\pnRespostas.cs" />
     <Compile Include="PN\pnUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VM\vmCertificado.cs" />
     <Compile Include="VM\vmEmail.cs" />
   </ItemGroup>
   <ItemGroup>

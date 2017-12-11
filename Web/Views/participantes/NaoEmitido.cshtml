@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Nao Emitido";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <h4>Seu certificado ainda não foi emitido, assim que ele for emitido você recerá um e-mail informando</h4>
+
+    @Html.ActionLink("Back to List", "Index")
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

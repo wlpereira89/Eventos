@@ -18,7 +18,10 @@
             @Html.DisplayNameFor(model => model.pergunta.pergunta1)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.usuario1.pass)
+            Evento
+        </th>    
+        <th>
+            @Html.DisplayNameFor(model => model.usuario1.Nome)
         </th>
         <th></th>
     </tr>
@@ -31,8 +34,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.pergunta.pergunta1)
         </td>
+        <th>
+            @Html.DisplayFor(model => item.pergunta.evento.Nome)
+        </th>    
         <td>
-            @Html.DisplayFor(modelItem => item.usuario1.pass)
+            @Html.DisplayFor(modelItem => item.usuario1.Nome)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

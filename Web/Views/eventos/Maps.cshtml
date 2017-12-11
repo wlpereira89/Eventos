@@ -3,6 +3,8 @@
     <title></title>
 </head>
 <body>
+
+
     <form id="form1" runat="server">
         <div>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDY4ZfxyNIbSSVQh7AEIdvHnm3-FAThbNI"></script>
@@ -13,10 +15,10 @@
                 
                 function IniciarMapa() {
                     exibirCaminhos = new google.maps.DirectionsRenderer();
-                    var latlng = new google.maps.LatLng(-15.682543, -47.978874);
+                    var latlng = new google.maps.LatLng(-25.4244287, -49.265381899999966);
                     var opcoes =
                         {
-                            zoom: 8,
+                            zoom: 11,
                             center: latlng,
                             mapTypeId: google.maps.MapTypeId.ROADMAP
                         };
@@ -59,7 +61,7 @@
                             </tr>
                             <tr>
                                 <td>Para:</td>
-                                <td><input id="valorfinal" type="text" style="width: 301px" /></td>
+                                <td><input id="valorfinal" value="UTFPR Campus Curitiba - Avenida Sete de Setembro - Rebouças, Curitiba - PR" type="text" style="width: 301px" /></td>
                             </tr>
                             <tr>
                                 <td align="right">

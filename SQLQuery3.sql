@@ -1,1 +1,1 @@
-﻿SELECT * FROM EVENTO
+﻿SELECT * FROM dbo.participante WHERE login = wagner;
